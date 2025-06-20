@@ -47,13 +47,17 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full">
-          <iframe
-            src="https://www.youtube.com/embed/OgOswt-Tamg?autoplay=1&mute=1&loop=1&playlist=OgOswt-Tamg&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             className="w-full h-full object-cover"
             style={{ minHeight: '100vh', minWidth: '177.77vh', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', position: 'absolute' }}
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-          ></iframe>
+          >
+            <source src="/praegrandis-construction-website/video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
