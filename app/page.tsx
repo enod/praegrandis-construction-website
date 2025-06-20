@@ -88,9 +88,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-          
+
+      {/* Statistics Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Statistics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 max-w-5xl mx-auto mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 max-w-5xl mx-auto">
             <div className="text-center">
               <div className="text-4xl lg:text-6xl font-light mb-3" style={{ color: '#F5C842' }}>15+</div>
               <p className="text-gray-500 text-sm uppercase tracking-widest font-medium">Years Building Sydney</p>
