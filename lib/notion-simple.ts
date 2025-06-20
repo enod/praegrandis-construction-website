@@ -75,6 +75,13 @@ function transformNotionPage(page: any): SimpleProject {
 // Get all projects
 export async function getProjects(): Promise<SimpleProject[]> {
   try {
+    // Debug info for production troubleshooting
+    if (process.env.NODE_ENV === 'production') {
+      console.log('Notion config check:');
+      console.log('- NOTION_TOKEN available:', !!process.env.NOTION_TOKEN);
+      console.log('- NOTION_DATABASE_ID available:', !!process.env.NOTION_DATABASE_ID);
+    }
+    
     if (!NOTION_DATABASE_ID) {
       console.warn('Notion database ID not configured, using sample data')
       return getSampleProjects()

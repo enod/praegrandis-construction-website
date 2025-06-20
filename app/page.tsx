@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { getFeaturedProjects } from '@/lib/notion-simple'
+import { getAssetPath } from '@/lib/assets'
 
 export default async function Home() {
   const featuredProjects = await getFeaturedProjects()
@@ -11,7 +12,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <img
-              src="/logo.png"
+              src={getAssetPath("/logo.png")}
               alt="Praegrandis Construction"
               className="h-10 w-auto"
             />
@@ -58,7 +59,7 @@ export default async function Home() {
             className="w-full h-full object-cover"
             style={{ minHeight: '100vh', minWidth: '177.77vh', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', position: 'absolute' }}
           >
-            <source src="/video.mp4" type="video/mp4" />
+            <source src={getAssetPath("/video.mp4")} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           {/* Dark Overlay */}
@@ -578,7 +579,7 @@ export default async function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="md:col-span-2">
               <img
-                src="/logo.png"
+                src={getAssetPath("/logo.png")}
                 alt="Praegrandis Construction"
                 className="h-8 w-auto mb-6 brightness-0 invert"
               />
