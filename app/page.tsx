@@ -118,26 +118,32 @@ export default function Home() {
 
           {/* Quick Trust Indicators */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F5C842', opacity: 0.1 }}>
-                <div className="w-6 h-6 rounded-lg" style={{ backgroundColor: '#F5C842' }}></div>
+            <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F5C842', opacity: 0.1 }}>
+                <svg className="w-8 h-8" style={{ color: '#F5C842' }} fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 1L3 5v6c0 5.55 3.84 9.74 9 9.74s9-4.19 9-9.74V5l-7-4zM9 16l-4-4 1.41-1.41L9 13.17l6.59-6.59L17 8l-8 8z"/>
+                </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Licensed & Insured</h3>
               <p className="text-gray-600 text-sm">NSW Builder License, Public Liability & Workers Compensation</p>
             </div>
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#2E7D32', opacity: 0.1 }}>
-                <div className="w-6 h-6 rounded-lg" style={{ backgroundColor: '#2E7D32' }}></div>
+            <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#2E7D32', opacity: 0.1 }}>
+                <svg className="w-8 h-8" style={{ color: '#2E7D32' }} fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Quality Guaranteed</h3>
               <p className="text-gray-600 text-sm">7-year structural warranty on all residential projects</p>
             </div>
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gray-200 flex items-center justify-center">
-                <div className="w-6 h-6 rounded-lg bg-gray-400"></div>
+            <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#1E40AF', opacity: 0.1 }}>
+                <svg className="w-8 h-8" style={{ color: '#1E40AF' }} fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/>
+                </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Local Expertise</h3>
-              <p className="text-gray-600 text-sm">Sydney-based team with deep local knowledge</p>
+              <p className="text-gray-600 text-sm">Sydney-based team with deep local knowledge and experience</p>
             </div>
           </div>
         </div>
