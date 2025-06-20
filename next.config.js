@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
-  basePath: '/praegrandis-construction-website',
-  assetPrefix: '/praegrandis-construction-website',
+  basePath: process.env.NODE_ENV === 'production' ? '/praegrandis-construction-website' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/praegrandis-construction-website' : '',
   images: {
     unoptimized: true
   }
