@@ -119,27 +119,27 @@ export default function Home() {
           {/* Quick Trust Indicators */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F5C842', opacity: 0.1 }}>
-                <svg className="w-8 h-8" style={{ color: '#F5C842' }} fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 1L3 5v6c0 5.55 3.84 9.74 9 9.74s9-4.19 9-9.74V5l-7-4zM9 16l-4-4 1.41-1.41L9 13.17l6.59-6.59L17 8l-8 8z"/>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F5C842' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 1l-9 4v6c0 5.55 3.84 10.74 9 11 5.16-.26 9-5.45 9-11V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Licensed & Insured</h3>
               <p className="text-gray-600 text-sm">NSW Builder License, Public Liability & Workers Compensation</p>
             </div>
             <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#2E7D32', opacity: 0.1 }}>
-                <svg className="w-8 h-8" style={{ color: '#2E7D32' }} fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#2E7D32' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Quality Guaranteed</h3>
               <p className="text-gray-600 text-sm">7-year structural warranty on all residential projects</p>
             </div>
             <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#1E40AF', opacity: 0.1 }}>
-                <svg className="w-8 h-8" style={{ color: '#1E40AF' }} fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#1E40AF' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Local Expertise</h3>
@@ -445,19 +445,42 @@ export default function Home() {
                 projects: 'All projects included',
                 timeline: 'Full project duration'
               }
-            ].map((service, index) => (
-              <div
+            ].map((service, index) => {
+              const colors = ['#F5C842', '#2E7D32', '#1E40AF', '#DC2626'];
+              
+              const getIcon = (index) => {
+                switch(index) {
+                  case 0: // Residential Construction - House icon
+                    return <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>;
+                  case 1: // Commercial Projects - Building icon
+                    return <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+                    </svg>;
+                  case 2: // Renovations & Extensions - Tools icon
+                    return <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                    </svg>;
+                  case 3: // Project Management - Clipboard icon
+                    return <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>;
+                  default:
+                    return null;
+                }
+              };
+              
+              return (
+                <div
                 key={index}
                 className="group bg-white p-10 rounded-3xl border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
               >
                 <div 
                   className="w-16 h-16 rounded-2xl mb-8 flex items-center justify-center"
-                  style={{ backgroundColor: index % 2 === 0 ? '#F5C842' : '#2E7D32', opacity: 0.1 }}
+                  style={{ backgroundColor: colors[index] }}
                 >
-                  <div 
-                    className="w-8 h-8 rounded-xl" 
-                    style={{ backgroundColor: index % 2 === 0 ? '#F5C842' : '#2E7D32' }}
-                  />
+                  {getIcon(index)}
                 </div>
                 
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4">
@@ -488,7 +511,8 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -510,12 +534,11 @@ export default function Home() {
             <div className="text-center">
               <div 
                 className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6"
-                style={{ backgroundColor: '#F5C842', opacity: 0.1 }}
+                style={{ backgroundColor: '#F5C842' }}
               >
-                <div 
-                  className="w-10 h-10 rounded-2xl" 
-                  style={{ backgroundColor: '#F5C842' }}
-                />
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-3 text-lg">Visit Our Office</h3>
               <p className="text-gray-600 leading-relaxed">
@@ -528,12 +551,11 @@ export default function Home() {
             <div className="text-center">
               <div 
                 className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6"
-                style={{ backgroundColor: '#2E7D32', opacity: 0.1 }}
+                style={{ backgroundColor: '#2E7D32' }}
               >
-                <div 
-                  className="w-10 h-10 rounded-2xl" 
-                  style={{ backgroundColor: '#2E7D32' }}
-                />
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-3 text-lg">Call Direct</h3>
               <p className="text-gray-600 leading-relaxed">
@@ -543,8 +565,13 @@ export default function Home() {
             </div>
             
             <div className="text-center">
-              <div className="w-20 h-20 bg-gray-200 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                <div className="w-10 h-10 bg-gray-400 rounded-2xl" />
+              <div 
+                className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6"
+                style={{ backgroundColor: '#1E40AF' }}
+              >
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-3 text-lg">Email Us</h3>
               <p className="text-gray-600 leading-relaxed">
