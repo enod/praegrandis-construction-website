@@ -75,23 +75,33 @@ function transformNotionPage(page: any): SimpleProject {
 // Get all projects
 export async function getProjects(): Promise<SimpleProject[]> {
   try {
-    // Debug info for production troubleshooting
-    if (process.env.NODE_ENV === 'production') {
-      console.log('Notion config check:');
-      console.log('- NOTION_TOKEN available:', !!process.env.NOTION_TOKEN);
-      console.log('- NOTION_DATABASE_ID available:', !!process.env.NOTION_DATABASE_ID);
-    }
+    // Enhanced debug info for production troubleshooting
+    console.log('🔍 Notion Integration Debug:')
+    console.log('- Environment:', process.env.NODE_ENV)
+    console.log('- NOTION_TOKEN available:', !!process.env.NOTION_TOKEN)
+    console.log('- NOTION_DATABASE_ID available:', !!process.env.NOTION_DATABASE_ID)
+    console.log('- Database ID value:', NOTION_DATABASE_ID ? 'Set' : 'Missing')
     
     if (!NOTION_DATABASE_ID) {
-      console.warn('Notion database ID not configured, using sample data')
+      console.warn('❌ Notion database ID not configured, using sample data')
       return getSampleProjects()
     }
 
+    if (!process.env.NOTION_TOKEN) {
+      console.warn('❌ Notion token not configured, using sample data')
+      return getSampleProjects()
+    }
+
+    console.log('📡 Attempting to fetch from Notion database...')
     const response = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
     })
 
-    return response.results.map(transformNotionPage)
+    console.log(`✅ Notion fetch successful: ${response.results.length} projects found`)
+    const projects = response.results.map(transformNotionPage)
+    console.log('🔄 Transformed projects:', projects.map(p => ({ title: p.title, featured: p.featured })))
+    
+    return projects
   } catch (error) {
     console.error('Error fetching projects from Notion:', error)
     return getSampleProjects()
