@@ -572,11 +572,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="md:col-span-2">
-              <Image
-                src="/logo.png"
+              <img
+                src="/praegrandis-construction-website/logo.png"
                 alt="Praegrandis Construction"
-                width={200}
-                height={50}
                 className="h-8 w-auto mb-6 brightness-0 invert"
               />
               <p className="text-gray-400 leading-relaxed max-w-md mb-6">
