@@ -7,12 +7,9 @@ export default function Home() {
       <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <Image
-              src="/logo.png"
+            <img
+              src="/praegrandis-construction-website/logo.png"
               alt="Praegrandis Construction"
-              width={280}
-              height={75}
-              priority
               className="h-10 w-auto"
             />
             <div className="hidden md:flex items-center space-x-12">
