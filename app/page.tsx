@@ -24,7 +24,7 @@ export default function Home() {
       </nav>
 
       {/* Trust Indicators Strip */}
-      <div className="bg-gray-900 text-white py-3 mt-20">
+      <div className="bg-gray-900 text-white py-3 pt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-center space-x-8 text-sm">
             <div className="flex items-center space-x-2">
