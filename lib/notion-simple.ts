@@ -82,6 +82,17 @@ export async function getProjects(): Promise<SimpleProject[]> {
     console.log('- NOTION_DATABASE_ID available:', !!process.env.NOTION_DATABASE_ID)
     console.log('- Database ID value:', NOTION_DATABASE_ID ? 'Set' : 'Missing')
     
+    // Detailed environment variable debugging for GitHub Actions
+    if (process.env.NOTION_TOKEN) {
+      console.log('- NOTION_TOKEN length:', process.env.NOTION_TOKEN.length)
+      console.log('- NOTION_TOKEN preview:', process.env.NOTION_TOKEN.substring(0, 10) + '...')
+    }
+    
+    if (process.env.NOTION_DATABASE_ID) {
+      console.log('- NOTION_DATABASE_ID length:', process.env.NOTION_DATABASE_ID.length)
+      console.log('- NOTION_DATABASE_ID preview:', process.env.NOTION_DATABASE_ID.substring(0, 8) + '...')
+    }
+    
     if (!NOTION_DATABASE_ID) {
       console.warn('❌ Notion database ID not configured, using sample data')
       return getSampleProjects()
@@ -101,9 +112,17 @@ export async function getProjects(): Promise<SimpleProject[]> {
     const projects = response.results.map(transformNotionPage)
     console.log('🔄 Transformed projects:', projects.map(p => ({ title: p.title, featured: p.featured })))
     
+    // Force logging the actual data being returned for debugging
+    console.log('📋 Final projects data being returned:', JSON.stringify(projects, null, 2))
+    
     return projects
   } catch (error) {
-    console.error('Error fetching projects from Notion:', error)
+    console.error('❌ Error fetching projects from Notion:', error)
+    if (error instanceof Error) {
+      console.error('❌ Error message:', error.message)
+      console.error('❌ Error stack:', error.stack)
+    }
+    console.warn('🔄 Falling back to sample data')
     return getSampleProjects()
   }
 }
