@@ -1,0 +1,128 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import { SimpleProject } from '@/lib/notion-simple'
+
+interface SimpleProjectStoryProps {
+  project: SimpleProject
+}
+
+export default function SimpleProjectStory({ project }: SimpleProjectStoryProps) {
+  return (
+    <article className="min-h-screen bg-white">
+      {/* Hero Section with Title Overlay */}
+      <section className="relative h-[60vh] min-h-[500px]">
+        <div className="absolute inset-0 bg-gray-200">
+          {project.heroImage && (
+            <img 
+              src={project.heroImage} 
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+          )}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        
+        <div className="relative h-full flex items-end">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-16 text-white w-full">
+            <div className="max-w-3xl">
+              <div className="mb-4">
+                <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                  {project.type} • {project.location}
+                </span>
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-light mb-6 leading-tight">
+                {project.title}
+              </h1>
+              
+              <p className="text-lg lg:text-xl opacity-90 leading-relaxed">
+                {project.story}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Simple Gallery */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-12 text-center">
+            Project Gallery
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {project.galleryImages.map((image, index) => (
+              <div key={index} className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden group cursor-pointer">
+                <img 
+                  src={image} 
+                  alt={`${project.title} - Image ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Video Section (if available) */}
+      {project.videoUrl && (
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-5xl mx-auto px-6 lg:px-8">
+            <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-12 text-center">
+              Project Video
+            </h2>
+            
+            <div className="aspect-video bg-gray-900 rounded-2xl overflow-hidden">
+              {project.videoUrl.includes('youtube.com') || project.videoUrl.includes('youtu.be') ? (
+                <iframe
+                  src={project.videoUrl.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/')}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <video 
+                  src={project.videoUrl} 
+                  controls 
+                  className="w-full h-full"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Simple CTA */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-8">
+            Inspired by This Project?
+          </h2>
+          
+          <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+            Let's discuss how we can bring your vision to life with the same 
+            attention to detail and quality craftsmanship.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <a
+              href="/contact"
+              className="px-12 py-5 text-white font-medium rounded-full transition-all duration-300 hover:shadow-xl hover:scale-105"
+              style={{ backgroundColor: '#2E7D32' }}
+            >
+              Start Your Project
+            </a>
+            <Link
+              href="/projects"
+              className="px-12 py-5 border-2 border-gray-300 text-gray-700 font-medium rounded-full hover:border-gray-400 transition-all duration-300"
+            >
+              View More Projects
+            </Link>
+          </div>
+        </div>
+      </section>
+    </article>
+  )
+}
