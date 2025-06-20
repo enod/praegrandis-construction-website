@@ -1,5 +1,5 @@
-// Notion CMS Integration Structure
-// This file will contain the Notion database integration when ready
+// Notion CMS Integration for Praegrandis Construction Projects
+import { Client } from '@notionhq/client'
 
 export interface NotionProject {
   id: string
@@ -60,31 +60,208 @@ export interface NotionDatabaseResponse {
   nextCursor?: string
 }
 
-// Placeholder functions for future Notion integration
+// Initialize Notion client
+const notion = new Client({
+  auth: process.env.NOTION_TOKEN,
+})
+
+const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID!
+
+// Helper function to extract text from Notion rich text
+function extractRichText(richText: any[]): string {
+  return richText?.map((text: any) => text.plain_text).join('') || ''
+}
+
+// Helper function to extract file URLs from Notion files
+function extractFileUrls(files: any[]): string[] {
+  return files?.map((file: any) => {
+    if (file.type === 'external') {
+      return file.external.url
+    } else if (file.type === 'file') {
+      return file.file.url
+    }
+    return ''
+  }).filter(Boolean) || []
+}
+
+// Transform Notion page data to NotionProject interface
+function transformNotionPage(page: any): NotionProject {
+  const properties = page.properties
+  
+  return {
+    id: page.id,
+    title: extractRichText(properties.Title?.title || []),
+    location: extractRichText(properties.Location?.rich_text || []),
+    type: properties.Type?.select?.name || 'Residential',
+    status: properties.Status?.status?.name || 'Completed',
+    timeline: extractRichText(properties.Timeline?.rich_text || []),
+    budget: extractRichText(properties.Budget?.rich_text || []),
+    client: extractRichText(properties.Client?.rich_text || []),
+    completedDate: properties['Completed Date']?.date?.start || '',
+    description: extractRichText(properties.Description?.rich_text || []),
+    
+    // Story components
+    vision: extractRichText(properties.Vision?.rich_text || []),
+    challenge: extractRichText(properties.Challenge?.rich_text || []),
+    solution: extractRichText(properties.Solution?.rich_text || []),
+    process: extractRichText(properties.Process?.rich_text || []).split('\n').filter(Boolean),
+    transformation: extractRichText(properties.Transformation?.rich_text || []),
+    impact: extractRichText(properties.Impact?.rich_text || []),
+    
+    // Media URLs
+    heroImage: extractFileUrls(properties['Hero Image']?.files || [])[0] || '/api/placeholder/1200/800',
+    beforeImages: extractFileUrls(properties['Before Images']?.files || []),
+    processImages: extractFileUrls(properties['Process Images']?.files || []),
+    afterImages: extractFileUrls(properties['After Images']?.files || []),
+    videoUrl: properties['Video URL']?.url || undefined,
+    
+    // Project details
+    materials: properties.Materials?.multi_select?.map((item: any) => item.name) || [],
+    teamMembers: properties['Team Members']?.multi_select?.map((item: any) => item.name) || [],
+    features: properties.Features?.multi_select?.map((item: any) => item.name) || [],
+    tags: properties.Tags?.multi_select?.map((item: any) => item.name) || [],
+    
+    // Client feedback
+    testimonial: properties['Testimonial Text']?.rich_text?.length ? {
+      text: extractRichText(properties['Testimonial Text']?.rich_text || []),
+      author: extractRichText(properties['Testimonial Author']?.rich_text || []),
+      role: extractRichText(properties['Testimonial Role']?.rich_text || []),
+      rating: properties['Testimonial Rating']?.number || 5
+    } : undefined,
+    
+    // Recognition
+    awards: properties.Awards?.multi_select?.map((item: any) => item.name) || [],
+    featured: properties.Featured?.checkbox || false,
+    
+    // SEO & metadata
+    slug: extractRichText(properties.Slug?.rich_text || []) || 
+          extractRichText(properties.Title?.title || []).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+    metaDescription: extractRichText(properties['Meta Description']?.rich_text || []),
+    publishedDate: properties['Published Data']?.date?.start || properties['Completed Date']?.date?.start || ''
+  }
+}
+
+// Main API functions
 export async function getProjects(): Promise<NotionProject[]> {
-  // TODO: Implement Notion API integration
-  // For now, return sample data
-  return getSampleProjects()
+  try {
+    if (!NOTION_DATABASE_ID) {
+      console.warn('Notion database ID not configured, using sample data')
+      return getSampleProjects()
+    }
+
+    const response = await notion.databases.query({
+      database_id: NOTION_DATABASE_ID,
+      // Remove filters for now since we need to match your actual database schema
+      // filter: {
+      //   property: 'Status',
+      //   select: {
+      //     equals: 'Completed'
+      //   }
+      // },
+    })
+
+    return response.results.map(transformNotionPage)
+  } catch (error) {
+    console.error('Error fetching projects from Notion:', error)
+    // Fallback to sample data on error
+    return getSampleProjects()
+  }
 }
 
 export async function getProjectBySlug(slug: string): Promise<NotionProject | null> {
-  // TODO: Implement Notion API integration
-  const projects = await getProjects()
-  return projects.find(project => project.slug === slug) || null
+  try {
+    if (!NOTION_DATABASE_ID) {
+      const projects = getSampleProjects()
+      return projects.find(project => project.slug === slug) || null
+    }
+
+    const response = await notion.databases.query({
+      database_id: NOTION_DATABASE_ID,
+      filter: {
+        property: 'Slug',
+        rich_text: {
+          equals: slug
+        }
+      }
+    })
+
+    if (response.results.length === 0) {
+      return null
+    }
+
+    return transformNotionPage(response.results[0])
+  } catch (error) {
+    console.error('Error fetching project by slug from Notion:', error)
+    // Fallback to sample data
+    const projects = getSampleProjects()
+    return projects.find(project => project.slug === slug) || null
+  }
 }
 
 export async function getFeaturedProjects(): Promise<NotionProject[]> {
-  // TODO: Implement Notion API integration
-  const projects = await getProjects()
-  return projects.filter(project => project.featured)
+  try {
+    if (!NOTION_DATABASE_ID) {
+      const projects = getSampleProjects()
+      return projects.filter(project => project.featured)
+    }
+
+    const response = await notion.databases.query({
+      database_id: NOTION_DATABASE_ID,
+      // Remove filters for now - we'll filter in JavaScript
+      // filter: {
+      //   and: [
+      //     {
+      //       property: 'Featured',
+      //       checkbox: {
+      //         equals: true
+      //       }
+      //     },
+      //     {
+      //       property: 'Status',
+      //       select: {
+      //         equals: 'Completed'
+      //       }
+      //     }
+      //   ]
+      // },
+    })
+
+    const allProjects = response.results.map(transformNotionPage)
+    return allProjects.filter(project => project.featured)
+  } catch (error) {
+    console.error('Error fetching featured projects from Notion:', error)
+    // Fallback to sample data
+    const projects = getSampleProjects()
+    return projects.filter(project => project.featured)
+  }
 }
 
 export async function getProjectsByType(type: string): Promise<NotionProject[]> {
-  // TODO: Implement Notion API integration
-  const projects = await getProjects()
-  return projects.filter(project => 
-    type === 'all' || project.type.toLowerCase() === type.toLowerCase()
-  )
+  try {
+    if (!NOTION_DATABASE_ID) {
+      const projects = getSampleProjects()
+      return projects.filter(project => 
+        type === 'all' || project.type.toLowerCase() === type.toLowerCase()
+      )
+    }
+
+    const response = await notion.databases.query({
+      database_id: NOTION_DATABASE_ID,
+      // Remove filters for now - we'll filter in JavaScript
+    })
+
+    const allProjects = response.results.map(transformNotionPage)
+    return allProjects.filter(project => 
+      type === 'all' || project.type.toLowerCase() === type.toLowerCase()
+    )
+  } catch (error) {
+    console.error('Error fetching projects by type from Notion:', error)
+    // Fallback to sample data
+    const projects = getSampleProjects()
+    return projects.filter(project => 
+      type === 'all' || project.type.toLowerCase() === type.toLowerCase()
+    )
+  }
 }
 
 // Sample data structure for development

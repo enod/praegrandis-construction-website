@@ -30,6 +30,9 @@ jobs:
         run: npm ci
         
       - name: Build
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: npm run build
         
       - name: Setup Pages

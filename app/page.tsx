@@ -1,6 +1,9 @@
 import React from 'react'
+import Link from 'next/link'
+import { getFeaturedProjects } from '@/lib/notion-simple'
 
-export default function Home() {
+export default async function Home() {
+  const featuredProjects = await getFeaturedProjects()
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -163,33 +166,8 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {[
-              {
-                title: 'Bondi Beach House Renovation',
-                location: 'Bondi Beach, NSW',
-                type: 'Residential Renovation',
-                description: 'Complete transformation of a 1960s beach house into a modern family home with sustainable features.',
-                challenge: 'Heritage constraints and coastal exposure',
-                result: 'Award-winning design that doubled living space'
-              },
-              {
-                title: 'Surry Hills Commercial Fit-Out',
-                location: 'Surry Hills, NSW',
-                type: 'Commercial Construction',
-                description: 'Modern office space for tech startup with flexible meeting areas and collaborative zones.',
-                challenge: 'Tight timeline and budget constraints',
-                result: '25% under budget, delivered 2 weeks early'
-              },
-              {
-                title: 'Mosman Family Extension',
-                location: 'Mosman, NSW',
-                type: 'Home Extension',
-                description: 'Two-story extension adding master suite and family entertainment area.',
-                challenge: 'Steep block and neighbour considerations',
-                result: 'Seamless integration with existing home'
-              }
-            ].map((project, index) => (
-              <div key={index} className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+            {featuredProjects.slice(0, 3).map((project, index) => (
+              <Link key={index} href={`/projects/${project.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 block">
                 <div className="h-64 bg-gray-200 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-gray-700">
@@ -204,24 +182,14 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {project.description}
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {project.story}
                   </p>
-                  <div className="space-y-2 mb-6">
-                    <div className="flex items-start space-x-2">
-                      <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#F5C842' }}></div>
-                      <p className="text-sm text-gray-600"><strong>Challenge:</strong> {project.challenge}</p>
-                    </div>
-                    <div className="flex items-start space-x-2">
-                      <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#2E7D32' }}></div>
-                      <p className="text-sm text-gray-600"><strong>Result:</strong> {project.result}</p>
-                    </div>
-                  </div>
-                  <button className="text-base font-medium hover:underline transition-colors" style={{ color: '#2E7D32' }}>
+                  <span className="text-base font-medium hover:underline transition-colors" style={{ color: '#2E7D32' }}>
                     Read Full Story →
-                  </button>
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
