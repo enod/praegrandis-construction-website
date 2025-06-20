@@ -43,16 +43,30 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 lg:px-8 pt-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-6xl lg:text-8xl font-light text-gray-900 mb-8 leading-[1.1]">
+      {/* Hero Section with Background Video */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            src="https://www.youtube.com/embed/OgOswt-Tamg?autoplay=1&mute=1&loop=1&playlist=OgOswt-Tamg&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+            className="w-full h-full object-cover"
+            style={{ minHeight: '100vh', minWidth: '177.77vh', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', position: 'absolute' }}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+        
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-6xl mx-auto text-center px-6 lg:px-8">
+          <h1 className="text-6xl lg:text-8xl font-light text-white mb-8 leading-[1.1] drop-shadow-lg">
             Transforming Sydney
-            <span className="block font-medium mt-4" style={{ color: '#2E7D32' }}>Homes & Businesses</span>
-            <span className="block text-4xl lg:text-5xl font-light text-gray-600 mt-6">Since 2009</span>
+            <span className="block font-medium mt-4" style={{ color: '#F5C842' }}>Homes & Businesses</span>
+            <span className="block text-4xl lg:text-5xl font-light text-white/90 mt-6">Since 2009</span>
           </h1>
           
-          <p className="text-xl lg:text-2xl text-gray-500 mb-12 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed drop-shadow-md">
             Award-winning construction company delivering exceptional residential and commercial projects 
             across Sydney with uncompromising quality and innovative design solutions.
           </p>
@@ -67,11 +81,13 @@ export default function Home() {
             </a>
             <a
               href="#contact"
-              className="px-12 py-5 border-2 border-gray-200 text-gray-700 font-medium rounded-full hover:border-gray-300 hover:bg-gray-50 transition-all duration-300"
+              className="px-12 py-5 border-2 border-white/80 text-white font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
             >
               Start Your Project
             </a>
           </div>
+        </div>
+      </section>
           
           {/* Statistics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 max-w-5xl mx-auto mb-20">
