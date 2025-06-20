@@ -448,7 +448,7 @@ export default function Home() {
             ].map((service, index) => {
               const colors = ['#F5C842', '#2E7D32', '#1E40AF', '#DC2626'];
               
-              const getIcon = (index) => {
+              const getIcon = (index: number) => {
                 switch(index) {
                   case 0: // Residential Construction - House icon
                     return <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
