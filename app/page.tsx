@@ -202,15 +202,15 @@ export default async function Home() {
           </div>
 
           <div className="text-center">
-            <a
-              href="#portfolio"
+            <Link
+              href="/projects"
               className="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-700 font-medium rounded-full hover:border-gray-400 transition-colors"
             >
               View All Project Stories
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

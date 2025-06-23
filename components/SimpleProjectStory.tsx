@@ -23,7 +23,7 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
               <Link href="/#contact" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">Contact</Link>
             </div>
             <Link 
-              href="/" 
+              href="/projects" 
               className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200 font-medium"
             >
               ← Back to Projects
