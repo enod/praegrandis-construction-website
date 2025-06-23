@@ -11,11 +11,16 @@ export default async function Home() {
       <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <img
-              src={getAssetPath("/logo.png")}
-              alt="Praegrandis Construction"
-              className="h-10 w-auto"
-            />
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="focus:outline-none"
+            >
+              <img
+                src={getAssetPath("/logo.png")}
+                alt="Praegrandis Construction"
+                className="h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+              />
+            </button>
             <div className="hidden md:flex items-center space-x-12">
               <a href="#about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">About</a>
               <a href="#services" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">Services</a>
@@ -170,6 +175,13 @@ export default async function Home() {
             {featuredProjects.slice(0, 3).map((project, index) => (
               <Link key={index} href={`/projects/${project.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 block">
                 <div className="h-64 bg-gray-200 relative overflow-hidden">
+                  {project.heroImage && (
+                    <img 
+                      src={project.heroImage} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-gray-700">
                     {project.type}
