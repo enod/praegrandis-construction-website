@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { SimpleProject } from '@/lib/notion-simple'
+import LogoButton from '@/components/LogoButton'
 
 interface SimpleProjectStoryProps {
   project: SimpleProject
@@ -9,8 +10,30 @@ interface SimpleProjectStoryProps {
 export default function SimpleProjectStory({ project }: SimpleProjectStoryProps) {
   return (
     <article className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <LogoButton />
+            <div className="hidden md:flex items-center space-x-12">
+              <Link href="/#about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">About</Link>
+              <Link href="/#services" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">Services</Link>
+              <Link href="/#portfolio" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">Portfolio</Link>
+              <Link href="/#testimonials" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">Testimonials</Link>
+              <Link href="/#contact" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">Contact</Link>
+            </div>
+            <Link 
+              href="/" 
+              className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200 font-medium"
+            >
+              ← Back to Projects
+            </Link>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section with Title Overlay */}
-      <section className="relative h-[60vh] min-h-[500px]">
+      <section className="relative h-[60vh] min-h-[500px] pt-20">
         <div className="absolute inset-0 bg-gray-200">
           {project.heroImage && (
             <Image 
