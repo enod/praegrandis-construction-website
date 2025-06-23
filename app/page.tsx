@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { getFeaturedProjects } from '@/lib/notion-simple'
 import { getAssetPath } from '@/lib/assets'
+import LogoButton from '@/components/LogoButton'
 
 export default async function Home() {
   const featuredProjects = await getFeaturedProjects()
@@ -11,16 +12,7 @@ export default async function Home() {
       <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="focus:outline-none"
-            >
-              <img
-                src={getAssetPath("/logo.png")}
-                alt="Praegrandis Construction"
-                className="h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity"
-              />
-            </button>
+            <LogoButton />
             <div className="hidden md:flex items-center space-x-12">
               <a href="#about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">About</a>
               <a href="#services" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">Services</a>
