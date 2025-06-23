@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
-  basePath: process.env.NODE_ENV === 'production' ? '/praegrandis-construction-website' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/praegrandis-construction-website' : '',
   images: {
-    unoptimized: true
-  }
+    domains: ['prod-files-secure.s3.us-west-2.amazonaws.com'],
+  },
 };
 
 module.exports = nextConfig;
