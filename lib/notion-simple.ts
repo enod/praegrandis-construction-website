@@ -30,6 +30,16 @@ function extractRichText(richText: any[]): string {
   return richText?.map((text: any) => text.plain_text).join('') || ''
 }
 
+// Helper function to generate slug from title
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // Remove special characters except spaces and hyphens
+    .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
+    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+}
+
 // Helper function to extract file URLs from Notion files
 function extractFileUrls(files: any[]): string[] {
   return files?.map((file: any) => {
@@ -73,9 +83,9 @@ function transformNotionPage(page: any): SimpleProject {
     // Display
     featured: properties.Featured?.checkbox || false,
     
-    // SEO
+    // SEO - Use Notion slug if available, otherwise generate from title
     slug: extractRichText(properties.Slug?.rich_text || []) || 
-          extractRichText(properties.Title?.title || []).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+          generateSlug(extractRichText(properties.Title?.title || [])),
   }
 }
 
@@ -142,7 +152,8 @@ export async function getProjectBySlug(slug: string): Promise<SimpleProject | nu
       return projects.find(project => project.slug === slug) || null
     }
 
-    const response = await notion.databases.query({
+    // First, try to find by explicit slug
+    const slugResponse = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
       filter: {
         property: 'Slug',
@@ -152,11 +163,14 @@ export async function getProjectBySlug(slug: string): Promise<SimpleProject | nu
       }
     })
 
-    if (response.results.length === 0) {
-      return null
+    if (slugResponse.results.length > 0) {
+      return transformNotionPage(slugResponse.results[0])
     }
 
-    return transformNotionPage(response.results[0])
+    // If no explicit slug found, get all projects and find by generated slug
+    const allProjects = await getProjects()
+    return allProjects.find(project => project.slug === slug) || null
+
   } catch (error) {
     console.error('Error fetching project by slug from Notion:', error)
     const projects = getSampleProjects()

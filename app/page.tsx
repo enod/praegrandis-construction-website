@@ -242,6 +242,69 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Trust Indicators Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-light text-gray-900 mb-6">
+              Your Peace of Mind is Our Priority
+            </h2>
+            <p className="text-xl text-gray-500 max-w-3xl mx-auto">
+              We're committed to delivering projects with complete transparency, 
+              guaranteed quality, and local expertise you can trust.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+            <div className="text-center">
+              <div 
+                className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                style={{ backgroundColor: '#F5C842' }}
+              >
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Licensed & Insured</h3>
+              <p className="text-gray-600 leading-relaxed">
+                NSW Builder License, Public Liability & Workers Compensation
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div 
+                className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                style={{ backgroundColor: '#2E7D32' }}
+              >
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Quality Guaranteed</h3>
+              <p className="text-gray-600 leading-relaxed">
+                7-year structural warranty on all residential projects
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div 
+                className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                style={{ backgroundColor: '#1E40AF' }}
+              >
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Local Expertise</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Sydney-based team with deep local knowledge and experience
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
       <section id="services" className="py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -543,7 +606,7 @@ export default async function Home() {
               <img
                 src={getAssetPath("/logo.png")}
                 alt="Praegrandis Construction"
-                className="h-8 w-auto mb-6 brightness-0 invert"
+                className="h-8 w-auto mb-6"
               />
               <p className="text-gray-400 leading-relaxed max-w-md mb-6">
                 Building excellence in Sydney since 2020. Licensed, insured, and committed 
@@ -551,7 +614,6 @@ export default async function Home() {
               </p>
               <div className="text-sm text-gray-500">
                 <div>NSW Builder License: 363658C</div>
-                <div>ABN: 12 345 678 901</div>
               </div>
             </div>
 
