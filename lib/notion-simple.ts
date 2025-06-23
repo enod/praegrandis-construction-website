@@ -56,6 +56,13 @@ function transformNotionPage(page: any): SimpleProject {
     // Media
     heroImage: extractFileUrls(properties['Hero Image']?.files || [])[0] || '/api/placeholder/1200/800',
     galleryImages: [
+      ...extractFileUrls(properties['1']?.files || []),
+      ...extractFileUrls(properties['2']?.files || []),
+      ...extractFileUrls(properties['3']?.files || []),
+      ...extractFileUrls(properties['4']?.files || []),
+      ...extractFileUrls(properties['5']?.files || []),
+      ...extractFileUrls(properties['6']?.files || []),
+      // Fallback to old columns for backward compatibility
       ...extractFileUrls(properties['Gallery Images']?.files || []),
       ...extractFileUrls(properties['Before Images']?.files || []),
       ...extractFileUrls(properties['After Images']?.files || []),

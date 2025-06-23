@@ -69,30 +69,7 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
         </div>
       </section>
 
-      {/* Simple Gallery */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-12 text-center">
-            Project Gallery
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {project.galleryImages.map((image, index) => (
-              <div key={index} className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden group cursor-pointer relative">
-                <Image 
-                  src={image} 
-                  alt={`${project.title} - Image ${index + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Video Section (if available) */}
+      {/* YouTube Video Section */}
       {project.videoUrl && (
         <section className="py-20 bg-gray-50">
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
@@ -100,19 +77,21 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
               Project Video
             </h2>
             
-            <div className="aspect-video bg-gray-900 rounded-2xl overflow-hidden">
+            <div className="aspect-video bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
               {project.videoUrl.includes('youtube.com') || project.videoUrl.includes('youtu.be') ? (
                 <iframe
                   src={project.videoUrl.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/')}
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  title={`${project.title} - Project Video`}
                 />
               ) : (
                 <video 
                   src={project.videoUrl} 
                   controls 
                   className="w-full h-full"
+                  poster={project.heroImage}
                 >
                   Your browser does not support the video tag.
                 </video>
@@ -121,6 +100,39 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
           </div>
         </section>
       )}
+
+      {/* Project Gallery */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-12 text-center">
+            Project Gallery
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {project.galleryImages.slice(0, 6).map((image, index) => (
+              <div key={index} className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden group cursor-pointer relative">
+                <Image 
+                  src={image} 
+                  alt={`${project.title} - Image ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {index + 1} / 6
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {project.galleryImages.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500">Gallery images will appear here once added to Notion columns 1-6</p>
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Simple CTA */}
       <section className="py-20">
