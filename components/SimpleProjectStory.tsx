@@ -13,10 +13,13 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
       <section className="relative h-[60vh] min-h-[500px]">
         <div className="absolute inset-0 bg-gray-200">
           {project.heroImage && (
-            <img 
+            <Image 
               src={project.heroImage} 
               alt={project.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
             />
           )}
         </div>
@@ -52,11 +55,13 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.galleryImages.map((image, index) => (
-              <div key={index} className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden group cursor-pointer">
-                <img 
+              <div key={index} className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden group cursor-pointer relative">
+                <Image 
                   src={image} 
                   alt={`${project.title} - Image ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
             ))}

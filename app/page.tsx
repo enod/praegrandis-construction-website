@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getFeaturedProjects } from '@/lib/notion-simple'
 import { getAssetPath } from '@/lib/assets'
 import LogoButton from '@/components/LogoButton'
@@ -168,10 +169,12 @@ export default async function Home() {
               <Link key={index} href={`/projects/${project.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 block">
                 <div className="h-64 bg-gray-200 relative overflow-hidden">
                   {project.heroImage && (
-                    <img 
+                    <Image 
                       src={project.heroImage} 
                       alt={project.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
