@@ -128,17 +128,12 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
             Project Gallery
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-6">
             {project.galleryImages.slice(0, 6).map((image, index) => (
               <div 
                 key={index} 
                 className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden group cursor-pointer relative"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  console.log('Gallery image clicked, index:', index)
-                  alert(`Clicked image ${index + 1} - Opening lightbox`)
-                  openLightbox(index)
-                }}
+                onClick={() => openLightbox(index)}
               >
                 <Image 
                   src={image} 
@@ -156,7 +151,7 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
                   </div>
                 </div>
                 <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {index + 1} / 6
+                  {index + 1} / {project.galleryImages.slice(0, 6).length}
                 </div>
               </div>
             ))}
