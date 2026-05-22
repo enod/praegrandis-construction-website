@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T03:56:24.474Z",
+  "generatedAt": "2026-05-22T04:00:40.365Z",
   "databaseId": "102e1f1b4e2a82dc927d816f1f940967",
   "settings": {
     "quality": 82,
@@ -7,6 +7,23 @@
     "heroMaxWidth": 2400
   },
   "projects": {
+    "368e1f1b-4e2a-8031-ae23-d2935ce9a409": {
+      "title": "G21D HOUSE",
+      "slug": "g21d-house",
+      "featured": false,
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8031ae23d2935ce9a409/1-1-2bdd44f2f572.webp",
+            "width": 1800,
+            "height": 1004,
+            "bytes": 270110,
+            "originalBytes": 7042146,
+            "sourceName": "s3 upscale.png"
+          }
+        ]
+      }
+    },
     "33ee1f1b-4e2a-8366-b456-011b548389a1": {
       "title": "B6R HOSUE",
       "slug": "b6r-hosue",
