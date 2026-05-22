@@ -1,0 +1,457 @@
+{
+  "generatedAt": "2026-05-22T03:06:37.350Z",
+  "databaseId": "102e1f1b4e2a82dc927d816f1f940967",
+  "settings": {
+    "quality": 82,
+    "defaultMaxWidth": 1800,
+    "heroMaxWidth": 2400
+  },
+  "projects": {
+    "33ee1f1b-4e2a-8366-b456-011b548389a1": {
+      "title": "B6R HOSUE",
+      "slug": "b6r-hosue",
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/33ee1f1b4e2a8366b456011b548389a1/1-1-280ba0a8806f.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 146018,
+            "originalBytes": 3765191,
+            "sourceName": "Belmore-Street-6-Rozelle-Portrait.jpg"
+          }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/33ee1f1b4e2a8366b456011b548389a1/2-1-0464c416f83f.webp",
+            "width": 1800,
+            "height": 2696,
+            "bytes": 237146,
+            "originalBytes": 3193825,
+            "sourceName": "Belmore-Street-6-Rozelle-Ensuitedetail.jpg"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/33ee1f1b4e2a8366b456011b548389a1/3-1-39c442c55234.webp",
+            "width": 1800,
+            "height": 1539,
+            "bytes": 351738,
+            "originalBytes": 2717775,
+            "sourceName": "IMG_9747.jpg"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/33ee1f1b4e2a8366b456011b548389a1/4-1-066109164c30.webp",
+            "width": 1800,
+            "height": 1202,
+            "bytes": 148110,
+            "originalBytes": 2187276,
+            "sourceName": "Belmore-Street-6-Rozelle-Study.jpg"
+          }
+        ],
+        "5": [
+          {
+            "path": "/notion-assets/33ee1f1b4e2a8366b456011b548389a1/5-1-1bf3b4d5ffad.webp",
+            "width": 1800,
+            "height": 1202,
+            "bytes": 95212,
+            "originalBytes": 3551765,
+            "sourceName": "Belmore-Street-6-Rozelle-Bed3.jpg"
+          }
+        ],
+        "6": [
+          {
+            "path": "/notion-assets/33ee1f1b4e2a8366b456011b548389a1/6-1-c702668dc769.webp",
+            "width": 1800,
+            "height": 1202,
+            "bytes": 167090,
+            "originalBytes": 2403027,
+            "sourceName": "Belmore-Street-6-Rozelle-Bed2.jpg"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/33ee1f1b4e2a8366b456011b548389a1/hero-image-1-e4b3d309f8cd.webp",
+            "width": 2400,
+            "height": 1602,
+            "bytes": 254642,
+            "originalBytes": 3765191,
+            "sourceName": "Belmore-Street-6-Rozelle-Portrait.jpg"
+          }
+        ]
+      }
+    },
+    "6b4e1f1b-4e2a-8340-a455-0186db947bb7": {
+      "title": "H24M HOUSE",
+      "slug": "h24m-house",
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/6b4e1f1b4e2a8340a4550186db947bb7/1-1-a354ae9726e5.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 144034,
+            "originalBytes": 3975387,
+            "sourceName": "Horton_Street_24_ Marrickville_Liv_Dining.jpg"
+          }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/6b4e1f1b4e2a8340a4550186db947bb7/2-1-61cdad72e7e0.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 321618,
+            "originalBytes": 4423697,
+            "sourceName": "Horton_Street_24_ Marrickville_Hall.jpg"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/6b4e1f1b4e2a8340a4550186db947bb7/3-1-9f32faac099d.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 125180,
+            "originalBytes": 3432353,
+            "sourceName": "Horton_Street_24_ Marrickville_Kit_Liv.jpg"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/6b4e1f1b4e2a8340a4550186db947bb7/4-1-024b12a90840.webp",
+            "width": 1800,
+            "height": 2698,
+            "bytes": 426878,
+            "originalBytes": 4275072,
+            "sourceName": "Horton_Street_24_ Marrickville_Vert_2.jpg"
+          }
+        ],
+        "5": [
+          {
+            "path": "/notion-assets/6b4e1f1b4e2a8340a4550186db947bb7/5-1-f7b1b4a8ac94.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 166744,
+            "originalBytes": 3947618,
+            "sourceName": "Horton_Street_24_ Marrickville_Bath.jpg"
+          }
+        ],
+        "6": [
+          {
+            "path": "/notion-assets/6b4e1f1b4e2a8340a4550186db947bb7/6-1-f27adcd619fc.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 211544,
+            "originalBytes": 3965172,
+            "sourceName": "Horton_Street_24_Marrickville Dusk_Facade.jpg"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/6b4e1f1b4e2a8340a4550186db947bb7/hero-image-1-4c949698d385.webp",
+            "width": 2400,
+            "height": 1601,
+            "bytes": 337800,
+            "originalBytes": 3965172,
+            "sourceName": "Horton_Street_24_Marrickville Dusk_Facade.jpg"
+          }
+        ]
+      }
+    },
+    "36be1f1b-4e2a-8367-bc45-01c33c83ce01": {
+      "title": "S22M HOUSE",
+      "slug": "s22m-house",
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/36be1f1b4e2a8367bc4501c33c83ce01/1-1-82e96a68b71f.webp",
+            "width": 1372,
+            "height": 1920,
+            "bytes": 455708,
+            "originalBytes": 1402705,
+            "sourceName": "0T6A0568 copy 2.jpg"
+          }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/36be1f1b4e2a8367bc4501c33c83ce01/2-1-4004ddaa9162.webp",
+            "width": 1280,
+            "height": 1920,
+            "bytes": 222868,
+            "originalBytes": 1093145,
+            "sourceName": "0T6A0113-DxO_DeepPRIME 3 copy.jpg"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/36be1f1b4e2a8367bc4501c33c83ce01/3-1-bd7671d978fa.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 185736,
+            "originalBytes": 1107011,
+            "sourceName": "0T6A0497 copy 2.jpg"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/36be1f1b4e2a8367bc4501c33c83ce01/4-1-39b1059c796b.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 180314,
+            "originalBytes": 1142338,
+            "sourceName": "0T6A0116-HDR copy 2.jpg"
+          }
+        ],
+        "5": [
+          {
+            "path": "/notion-assets/36be1f1b4e2a8367bc4501c33c83ce01/5-1-1c687d92b871.webp",
+            "width": 1313,
+            "height": 1920,
+            "bytes": 191666,
+            "originalBytes": 836227,
+            "sourceName": "0T6A0225 copy 2.jpg"
+          }
+        ],
+        "6": [
+          {
+            "path": "/notion-assets/36be1f1b4e2a8367bc4501c33c83ce01/6-1-02adb67f364f.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 201764,
+            "originalBytes": 1059767,
+            "sourceName": "0T6A0515-DxO_DeepPRIME 3 copy.jpg"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/36be1f1b4e2a8367bc4501c33c83ce01/hero-image-1-e31e7dc48f1f.webp",
+            "width": 1920,
+            "height": 1280,
+            "bytes": 218114,
+            "originalBytes": 1107011,
+            "sourceName": "0T6A0497 copy 2.jpg"
+          }
+        ]
+      }
+    },
+    "b4ae1f1b-4e2a-8375-8f7d-01af805c0a80": {
+      "title": "B77N HOSUE",
+      "slug": "b77n-hosue",
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/1-1-614b5e867ff9.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 61524,
+            "originalBytes": 8688074,
+            "sourceName": "North Bridge 7.jpg"
+          }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/2-1-f55df8deebc8.webp",
+            "width": 1800,
+            "height": 2700,
+            "bytes": 131856,
+            "originalBytes": 9373391,
+            "sourceName": "North Bridge 60.jpg"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/3-1-7a3e216dc10d.webp",
+            "width": 1800,
+            "height": 2700,
+            "bytes": 63238,
+            "originalBytes": 7686676,
+            "sourceName": "North Bridge 86.jpg"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/4-1-0dbccc65024a.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 137872,
+            "originalBytes": 12104270,
+            "sourceName": "North Bridge 8.jpg"
+          }
+        ],
+        "5": [
+          {
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/5-1-87befd452c2f.webp",
+            "width": 1800,
+            "height": 2700,
+            "bytes": 109084,
+            "originalBytes": 8937902,
+            "sourceName": "North Bridge 25.jpg"
+          }
+        ],
+        "6": [
+          {
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/6-1-f89130d0d9f2.webp",
+            "width": 1800,
+            "height": 2700,
+            "bytes": 60106,
+            "originalBytes": 7524095,
+            "sourceName": "North Bridge 146.jpg"
+          }
+        ]
+      }
+    },
+    "f5ae1f1b-4e2a-82ac-8d53-81770286a87f": {
+      "title": "S111A HOUSE",
+      "slug": "s111a-house",
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/f5ae1f1b4e2a82ac8d5381770286a87f/1-1-1842369c0a21.webp",
+            "width": 564,
+            "height": 800,
+            "bytes": 52656,
+            "originalBytes": 117568,
+            "sourceName": "IMG_8189.JPEG"
+          }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/f5ae1f1b4e2a82ac8d5381770286a87f/2-1-837df83dc0ac.webp",
+            "width": 640,
+            "height": 417,
+            "bytes": 77390,
+            "originalBytes": 131462,
+            "sourceName": "IMG_8198.JPEG"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/f5ae1f1b4e2a82ac8d5381770286a87f/3-1-5edbdeaf379e.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 427838,
+            "originalBytes": 4911035,
+            "sourceName": "Original52075557.jpg"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/f5ae1f1b4e2a82ac8d5381770286a87f/4-1-1bb2ce862644.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 390852,
+            "originalBytes": 4391386,
+            "sourceName": "Original52075554.jpg"
+          }
+        ],
+        "5": [
+          {
+            "path": "/notion-assets/f5ae1f1b4e2a82ac8d5381770286a87f/5-1-4a048de601e6.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 120784,
+            "originalBytes": 3245840,
+            "sourceName": "Original52075560.jpg"
+          }
+        ],
+        "6": [
+          {
+            "path": "/notion-assets/f5ae1f1b4e2a82ac8d5381770286a87f/6-1-bf13a9921030.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 475904,
+            "originalBytes": 3847851,
+            "sourceName": "Original52065313.jpg"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/f5ae1f1b4e2a82ac8d5381770286a87f/hero-image-1-837df83dc0ac.webp",
+            "width": 640,
+            "height": 417,
+            "bytes": 77390,
+            "originalBytes": 131462,
+            "sourceName": "IMG_8198.JPEG"
+          }
+        ]
+      }
+    },
+    "cc1e1f1b-4e2a-82d6-b557-81ef8dd2fb58": {
+      "title": "L121R HOUSE",
+      "slug": "bondi-beach-house-transformation",
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/1-1-1adb2189e0d1.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 246284,
+            "originalBytes": 886485,
+            "sourceName": "0O3A7877_c6ec-f11e-beb1-2417-4760-ed5a-9be8-c647_20230824044257_original.jpg"
+          }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/2-1-b694679d070a.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 221280,
+            "originalBytes": 852145,
+            "sourceName": "0O3A7797_85a1-5686-04e7-2535-e291-392d-9741-b784_20230824044233_original.jpg"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/3-1-0fccbb892d3e.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 203194,
+            "originalBytes": 849354,
+            "sourceName": "0O3A7896_b5f0-e84b-987b-a9ae-46d5-deb7-bd54-98d8_20230824044304_original.jpg"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/4-1-8ac57bf52914.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 152614,
+            "originalBytes": 709187,
+            "sourceName": "0O3A7697_7f55-c57b-3d06-c702-b141-9dfd-9447-03f0_20230824044156_original.jpg"
+          }
+        ],
+        "5": [
+          {
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/5-1-1f3b2d724083.webp",
+            "width": 1800,
+            "height": 1200,
+            "bytes": 387536,
+            "originalBytes": 1121098,
+            "sourceName": "0O3A7920_26e4-714b-f7f5-73c9-0b3e-7334-8417-cb50_20230824044315_original.jpg"
+          }
+        ],
+        "6": [
+          {
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/6-1-545e97a7d2db.webp",
+            "width": 1800,
+            "height": 1201,
+            "bytes": 202762,
+            "originalBytes": 786637,
+            "sourceName": "0O3A7956_5722-f037-2744-38bf-045c-4ba9-db7b-8920_20230824044326_original.jpg"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/hero-image-1-9237554a6460.webp",
+            "width": 2400,
+            "height": 1600,
+            "bytes": 550080,
+            "originalBytes": 1042809,
+            "sourceName": "Lawson_St_121_Redfer_c53a-08c9-915e-0905-3610-b171-db31-8efa_20230825022140_original.jpg"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -30,10 +30,15 @@ let cachedAssetManifest: NotionAssetManifest | null | undefined
 
 interface NotionAssetManifest {
   projects?: Record<string, {
+    title?: string
+    slug?: string
     properties?: Record<string, Array<{
       path: string
       width?: number
       height?: number
+      bytes?: number
+      originalBytes?: number
+      sourceName?: string
     }>>
   }>
 }
@@ -68,9 +73,28 @@ function getAssetManifest(): NotionAssetManifest | null {
   return cachedAssetManifest ?? null
 }
 
-function getLocalAssetUrls(pageId: string, propertyName: string): string[] {
+function getProjectSlugFromPage(page: any): string {
+  const properties = page.properties || {}
+  const explicitSlug = extractRichText(properties.Slug?.rich_text || [])
+  const title = extractRichText(properties.Title?.title || [])
+
+  return explicitSlug || generateSlug(title)
+}
+
+function getManifestProjectForPage(page: any) {
   const manifest = getAssetManifest()
-  return manifest?.projects?.[pageId]?.properties?.[propertyName]?.map((asset) => asset.path).filter(Boolean) || []
+  const projects = manifest?.projects || {}
+
+  if (projects[page.id]) {
+    return projects[page.id]
+  }
+
+  const slug = getProjectSlugFromPage(page)
+  return Object.values(projects).find((project) => project.slug === slug)
+}
+
+function getLocalProjectAssetUrls(page: any, propertyName: string): string[] {
+  return getManifestProjectForPage(page)?.properties?.[propertyName]?.map((asset) => asset.path).filter(Boolean) || []
 }
 
 // Helper function to extract file URLs from Notion files
@@ -86,7 +110,7 @@ function extractFileUrls(files: any[]): string[] {
 }
 
 function extractProjectFileUrls(page: any, propertyName: string): string[] {
-  const localAssetUrls = getLocalAssetUrls(page.id, propertyName)
+  const localAssetUrls = getLocalProjectAssetUrls(page, propertyName)
 
   if (localAssetUrls.length > 0) {
     return localAssetUrls

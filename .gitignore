@@ -62,4 +62,3 @@ next-env.d.ts
 *.dmg
 *.iso
 .gstack/
-public/notion-assets/

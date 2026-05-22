@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import { Client } from '@notionhq/client'
 import sharp from 'sharp'
 import { createHash } from 'node:crypto'
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 dotenv.config({ path: '.env.local' })
@@ -105,6 +105,16 @@ async function readExistingManifest() {
   }
 }
 
+function findPreviousManifestProject(pageId, slug) {
+  const projects = previousManifest?.projects || {}
+
+  if (projects[pageId]) {
+    return projects[pageId]
+  }
+
+  return Object.values(projects).find((project) => project.slug === slug)
+}
+
 async function downloadImage(url) {
   const response = await fetch(url)
 
@@ -151,13 +161,16 @@ async function syncPageAssets(page) {
   const slug = richTextToPlainText(properties.Slug?.rich_text || []) || generateSlug(title)
   const pageDirName = pageId.replace(/-/g, '')
   const pageDir = path.join(outputDir, pageDirName)
+  const previousPageManifest = findPreviousManifestProject(pageId, slug)
   const pageManifest = {
+    ...previousPageManifest,
     title,
     slug,
-    properties: {},
+    properties: {
+      ...(previousPageManifest?.properties || {}),
+    },
   }
 
-  await rm(pageDir, { recursive: true, force: true })
   await mkdir(pageDir, { recursive: true })
 
   for (const propertyName of imageProperties) {
