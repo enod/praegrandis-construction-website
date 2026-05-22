@@ -84,6 +84,15 @@ function getPageStatus(properties) {
   return properties.Status?.status?.name || ''
 }
 
+function getPageMetadata(properties) {
+  return {
+    location: richTextToPlainText(properties.Location?.rich_text || []),
+    type: properties.Type?.select?.name || 'Residential',
+    story: richTextToPlainText(properties.Story?.rich_text || properties.Description?.rich_text || []),
+    videoUrl: properties['Video URL']?.url || properties.Video?.url || undefined,
+  }
+}
+
 async function fetchAllPages() {
   const pages = []
   let cursor
@@ -167,10 +176,15 @@ async function syncPageAssets(page) {
   const pageDirName = pageId.replace(/-/g, '')
   const pageDir = path.join(outputDir, pageDirName)
   const previousPageManifest = findPreviousManifestProject(pageId, slug)
+  const pageMetadata = getPageMetadata(properties)
   const pageManifest = {
     ...previousPageManifest,
-    title,
-    slug,
+    title: preserveSnapshotMetadata ? previousPageManifest?.title ?? title : title,
+    slug: preserveSnapshotMetadata ? previousPageManifest?.slug ?? slug : slug,
+    location: preserveSnapshotMetadata ? previousPageManifest?.location ?? pageMetadata.location : pageMetadata.location,
+    type: preserveSnapshotMetadata ? previousPageManifest?.type ?? pageMetadata.type : pageMetadata.type,
+    story: preserveSnapshotMetadata ? previousPageManifest?.story ?? pageMetadata.story : pageMetadata.story,
+    videoUrl: preserveSnapshotMetadata ? previousPageManifest?.videoUrl ?? pageMetadata.videoUrl : pageMetadata.videoUrl,
     status: preserveSnapshotMetadata
       ? previousPageManifest?.status ?? getPageStatus(properties)
       : getPageStatus(properties),
@@ -242,6 +256,7 @@ for (const page of pages) {
   entries.push(await syncPageAssets(page))
 }
 
+const syncedProjects = Object.fromEntries(entries)
 const manifest = {
   generatedAt: new Date().toISOString(),
   databaseId,
@@ -250,7 +265,12 @@ const manifest = {
     defaultMaxWidth,
     heroMaxWidth: maxWidthByProperty['Hero Image'],
   },
-  projects: Object.fromEntries(entries),
+  projects: preserveSnapshotMetadata
+    ? {
+      ...(previousManifest?.projects || {}),
+      ...syncedProjects,
+    }
+    : syncedProjects,
 }
 
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)

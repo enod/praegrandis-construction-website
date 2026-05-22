@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T04:30:28.812Z",
+  "generatedAt": "2026-05-22T04:37:51.554Z",
   "databaseId": "102e1f1b4e2a82dc927d816f1f940967",
   "settings": {
     "quality": 82,
@@ -33,7 +33,10 @@
             "sourceName": "Screenshot 2026-05-22 at 2.12.04 pm.png"
           }
         ]
-      }
+      },
+      "location": "Hurstville",
+      "type": "Residential",
+      "story": ""
     },
     "368e1f1b-4e2a-808f-afaa-e57032b60000": {
       "title": "F34M HOUSE",
@@ -61,7 +64,10 @@
             "sourceName": "facade 4k.png"
           }
         ]
-      }
+      },
+      "location": "Marrickville ",
+      "type": "Residential",
+      "story": ""
     },
     "368e1f1b-4e2a-8021-b88d-c4e918d55fc3": {
       "title": "M1S HOUSE",
@@ -119,7 +125,10 @@
             "sourceName": "Screenshot 2026-05-22 at 2.04.38 pm.png"
           }
         ]
-      }
+      },
+      "location": "Strathfield",
+      "type": "Residential",
+      "story": ""
     },
     "368e1f1b-4e2a-8031-ae23-d2935ce9a409": {
       "title": "G21D HOUSE",
@@ -197,7 +206,10 @@
           }
         ]
       },
-      "status": "In progress"
+      "status": "In progress",
+      "location": "Dulwich Hill",
+      "type": "Residential",
+      "story": ""
     },
     "33ee1f1b-4e2a-8366-b456-011b548389a1": {
       "title": "B6R HOSUE",
@@ -275,7 +287,11 @@
         ]
       },
       "featured": false,
-      "status": "Done"
+      "status": "Done",
+      "location": "Rozelle",
+      "type": "Residential",
+      "story": "",
+      "videoUrl": "https://youtu.be/gNXby6gOJLA"
     },
     "6b4e1f1b-4e2a-8340-a455-0186db947bb7": {
       "title": "H24M HOUSE",
@@ -353,7 +369,11 @@
         ]
       },
       "featured": true,
-      "status": "Done"
+      "status": "Done",
+      "location": "Marrickville",
+      "type": "Residential",
+      "story": "",
+      "videoUrl": "https://youtu.be/3rou07D8jqw"
     },
     "36be1f1b-4e2a-8367-bc45-01c33c83ce01": {
       "title": "S22M HOUSE",
@@ -431,7 +451,10 @@
         ]
       },
       "featured": true,
-      "status": "Done"
+      "status": "Done",
+      "location": "Marrickville",
+      "type": "Residential",
+      "story": ""
     },
     "b4ae1f1b-4e2a-8375-8f7d-01af805c0a80": {
       "title": "B77N HOSUE",
@@ -509,7 +532,10 @@
         ]
       },
       "featured": false,
-      "status": "Done"
+      "status": "Done",
+      "location": "Northbridge",
+      "type": "Residential",
+      "story": ""
     },
     "f5ae1f1b-4e2a-82ac-8d53-81770286a87f": {
       "title": "S111A HOUSE",
@@ -587,7 +613,11 @@
         ]
       },
       "featured": false,
-      "status": "Done"
+      "status": "Done",
+      "location": "Arncliffe",
+      "type": "Residential",
+      "story": "",
+      "videoUrl": "https://youtu.be/kqHCi-fOw2M"
     },
     "cc1e1f1b-4e2a-82d6-b557-81ef8dd2fb58": {
       "title": "L121R HOUSE",
@@ -665,7 +695,11 @@
         ]
       },
       "featured": true,
-      "status": "Done"
+      "status": "Done",
+      "location": "Redfern",
+      "type": "Residential",
+      "story": "",
+      "videoUrl": "https://youtu.be/ci9tYidH2ag"
     }
   }
 }

@@ -7,7 +7,7 @@ export interface SimpleProject {
   id: string
   title: string
   location: string
-  type: 'Residential' | 'Commercial' | 'Renovation' | 'Extension'
+  type: string
   status: string
   story: string // Short 2-3 sentence story
   slug: string
@@ -35,6 +35,10 @@ interface NotionAssetManifest {
     slug?: string
     featured?: boolean
     status?: string
+    location?: string
+    type?: string
+    story?: string
+    videoUrl?: string
     properties?: Record<string, Array<{
       path: string
       width?: number
@@ -100,14 +104,6 @@ function getLocalProjectAssetUrls(page: any, propertyName: string): string[] {
   return getManifestProjectForPage(page)?.properties?.[propertyName]?.map((asset) => asset.path).filter(Boolean) || []
 }
 
-function getLocalProjectFeatured(page: any): boolean | undefined {
-  return getManifestProjectForPage(page)?.featured
-}
-
-function getLocalProjectStatus(page: any): string | undefined {
-  return getManifestProjectForPage(page)?.status
-}
-
 // Helper function to extract file URLs from Notion files
 function extractFileUrls(files: any[]): string[] {
   return files?.map((file: any) => {
@@ -130,17 +126,86 @@ function extractProjectFileUrls(page: any, propertyName: string): string[] {
   return extractFileUrls(page.properties?.[propertyName]?.files || [])
 }
 
+function getManifestProjectAssetUrls(project: NonNullable<NotionAssetManifest['projects']>[string], propertyName: string): string[] {
+  return project.properties?.[propertyName]?.map((asset) => asset.path).filter(Boolean) || []
+}
+
+function transformManifestProject(id: string, project: NonNullable<NotionAssetManifest['projects']>[string]): SimpleProject | null {
+  if (!project.title || !project.slug) {
+    return null
+  }
+
+  return {
+    id,
+    title: project.title,
+    location: project.location || '',
+    type: project.type || 'Residential',
+    status: project.status || '',
+    story: project.story || '',
+    slug: project.slug,
+    heroImage: getManifestProjectAssetUrls(project, 'Hero Image')[0] || '',
+    galleryImages: [
+      ...getManifestProjectAssetUrls(project, '1'),
+      ...getManifestProjectAssetUrls(project, '2'),
+      ...getManifestProjectAssetUrls(project, '3'),
+      ...getManifestProjectAssetUrls(project, '4'),
+      ...getManifestProjectAssetUrls(project, '5'),
+      ...getManifestProjectAssetUrls(project, '6'),
+      ...getManifestProjectAssetUrls(project, 'Gallery Images'),
+      ...getManifestProjectAssetUrls(project, 'Before Images'),
+      ...getManifestProjectAssetUrls(project, 'After Images'),
+      ...getManifestProjectAssetUrls(project, 'Process Images'),
+    ].filter(Boolean),
+    videoUrl: project.videoUrl || undefined,
+    featured: project.featured || false,
+  }
+}
+
+function getManifestProjects(): SimpleProject[] {
+  const manifest = getAssetManifest()
+  const projects = manifest?.projects || {}
+
+  return Object.entries(projects)
+    .map(([id, project]) => transformManifestProject(id, project))
+    .filter((project): project is SimpleProject => Boolean(project))
+}
+
+function mergeManifestProjects(projects: SimpleProject[]): SimpleProject[] {
+  const manifestProjects = getManifestProjects()
+
+  if (manifestProjects.length === 0) {
+    return projects
+  }
+
+  const projectsById = new Map(projects.map((project) => [project.id, project]))
+  const projectsBySlug = new Map(projects.map((project) => [project.slug, project]))
+  const usedIds = new Set<string>()
+  const usedSlugs = new Set<string>()
+  const mergedProjects = manifestProjects.map((manifestProject) => {
+    const project = projectsById.get(manifestProject.id) || projectsBySlug.get(manifestProject.slug) || manifestProject
+
+    usedIds.add(project.id)
+    usedSlugs.add(project.slug)
+
+    return project
+  })
+  const extraProjects = projects.filter((project) => !usedIds.has(project.id) && !usedSlugs.has(project.slug))
+
+  return [...mergedProjects, ...extraProjects]
+}
+
 // Transform Notion page data to SimpleProject interface
 function transformNotionPage(page: any): SimpleProject {
   const properties = page.properties
+  const manifestProject = getManifestProjectForPage(page)
   
   return {
     id: page.id,
-    title: extractRichText(properties.Title?.title || []),
-    location: extractRichText(properties.Location?.rich_text || []),
-    type: properties.Type?.select?.name || 'Residential',
-    status: getLocalProjectStatus(page) ?? properties.Status?.status?.name ?? '',
-    story: extractRichText(properties.Story?.rich_text || properties.Description?.rich_text || []),
+    title: manifestProject?.title ?? extractRichText(properties.Title?.title || []),
+    location: manifestProject?.location ?? extractRichText(properties.Location?.rich_text || []),
+    type: manifestProject?.type ?? properties.Type?.select?.name ?? 'Residential',
+    status: manifestProject?.status ?? properties.Status?.status?.name ?? '',
+    story: manifestProject?.story ?? extractRichText(properties.Story?.rich_text || properties.Description?.rich_text || []),
     
     // Media
     heroImage: extractProjectFileUrls(page, 'Hero Image')[0] || '',
@@ -157,14 +222,15 @@ function transformNotionPage(page: any): SimpleProject {
       ...extractProjectFileUrls(page, 'After Images'),
       ...extractProjectFileUrls(page, 'Process Images'),
     ].filter(Boolean),
-    videoUrl: properties['Video URL']?.url || properties['Video']?.url || undefined,
+    videoUrl: manifestProject?.videoUrl || properties['Video URL']?.url || properties['Video']?.url || undefined,
     
     // Display
-    featured: getLocalProjectFeatured(page) ?? (properties.Featured?.checkbox || false),
+    featured: manifestProject?.featured ?? (properties.Featured?.checkbox || false),
     
     // SEO - Use Notion slug if available, otherwise generate from title
-    slug: extractRichText(properties.Slug?.rich_text || []) || 
-          generateSlug(extractRichText(properties.Title?.title || [])),
+    slug: manifestProject?.slug ?? (
+      extractRichText(properties.Slug?.rich_text || []) || generateSlug(extractRichText(properties.Title?.title || []))
+    ),
   }
 }
 
@@ -172,27 +238,27 @@ function transformNotionPage(page: any): SimpleProject {
 export async function getProjects(): Promise<SimpleProject[]> {
   try {
     if (!NOTION_DATABASE_ID) {
-      console.warn('Notion database ID not configured, using sample data')
-      return getSampleProjects()
+      console.warn('Notion database ID not configured, using local manifest or sample data')
+      return getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
     }
 
     if (!process.env.NOTION_TOKEN) {
-      console.warn('Notion token not configured, using sample data')
-      return getSampleProjects()
+      console.warn('Notion token not configured, using local manifest or sample data')
+      return getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
     }
 
     const response = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
     })
 
-    return response.results.map(transformNotionPage)
+    return mergeManifestProjects(response.results.map(transformNotionPage))
   } catch (error) {
     console.error('Error fetching projects from Notion:', error)
     if (error instanceof Error) {
       console.error('Error message:', error.message)
     }
-    console.warn('Falling back to sample data')
-    return getSampleProjects()
+    console.warn('Falling back to local manifest or sample data')
+    return getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
   }
 }
 
@@ -200,7 +266,7 @@ export async function getProjects(): Promise<SimpleProject[]> {
 export async function getProjectBySlug(slug: string): Promise<SimpleProject | null> {
   try {
     if (!NOTION_DATABASE_ID) {
-      const projects = getSampleProjects()
+      const projects = getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
       return projects.find(project => project.slug === slug) || null
     }
 
@@ -225,7 +291,7 @@ export async function getProjectBySlug(slug: string): Promise<SimpleProject | nu
 
   } catch (error) {
     console.error('Error fetching project by slug from Notion:', error)
-    const projects = getSampleProjects()
+    const projects = getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
     return projects.find(project => project.slug === slug) || null
   }
 }
