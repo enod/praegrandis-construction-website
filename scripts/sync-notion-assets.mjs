@@ -14,6 +14,7 @@ const notionToken = process.env.NOTION_TOKEN
 const outputDir = path.join(process.cwd(), 'public', 'notion-assets')
 const publicPrefix = '/notion-assets'
 const manifestPath = path.join(outputDir, 'manifest.json')
+const preserveSnapshotMetadata = process.env.CI === 'true' || Boolean(process.env.VERCEL)
 
 const imageProperties = [
   'Hero Image',
@@ -166,7 +167,9 @@ async function syncPageAssets(page) {
     ...previousPageManifest,
     title,
     slug,
-    featured: previousPageManifest?.featured ?? Boolean(properties.Featured?.checkbox),
+    featured: preserveSnapshotMetadata
+      ? previousPageManifest?.featured ?? Boolean(properties.Featured?.checkbox)
+      : Boolean(properties.Featured?.checkbox),
     properties: {
       ...(previousPageManifest?.properties || {}),
     },
