@@ -80,6 +80,10 @@ function getFileName(file, fallback) {
   return file?.name || fallback
 }
 
+function getPageStatus(properties) {
+  return properties.Status?.status?.name || ''
+}
+
 async function fetchAllPages() {
   const pages = []
   let cursor
@@ -167,6 +171,9 @@ async function syncPageAssets(page) {
     ...previousPageManifest,
     title,
     slug,
+    status: preserveSnapshotMetadata
+      ? previousPageManifest?.status ?? getPageStatus(properties)
+      : getPageStatus(properties),
     featured: preserveSnapshotMetadata
       ? previousPageManifest?.featured ?? Boolean(properties.Featured?.checkbox)
       : Boolean(properties.Featured?.checkbox),

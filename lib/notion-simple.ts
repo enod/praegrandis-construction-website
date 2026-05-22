@@ -8,6 +8,7 @@ export interface SimpleProject {
   title: string
   location: string
   type: 'Residential' | 'Commercial' | 'Renovation' | 'Extension'
+  status: string
   story: string // Short 2-3 sentence story
   slug: string
   
@@ -33,6 +34,7 @@ interface NotionAssetManifest {
     title?: string
     slug?: string
     featured?: boolean
+    status?: string
     properties?: Record<string, Array<{
       path: string
       width?: number
@@ -102,6 +104,10 @@ function getLocalProjectFeatured(page: any): boolean | undefined {
   return getManifestProjectForPage(page)?.featured
 }
 
+function getLocalProjectStatus(page: any): string | undefined {
+  return getManifestProjectForPage(page)?.status
+}
+
 // Helper function to extract file URLs from Notion files
 function extractFileUrls(files: any[]): string[] {
   return files?.map((file: any) => {
@@ -133,6 +139,7 @@ function transformNotionPage(page: any): SimpleProject {
     title: extractRichText(properties.Title?.title || []),
     location: extractRichText(properties.Location?.rich_text || []),
     type: properties.Type?.select?.name || 'Residential',
+    status: getLocalProjectStatus(page) ?? properties.Status?.status?.name ?? '',
     story: extractRichText(properties.Story?.rich_text || properties.Description?.rich_text || []),
     
     // Media
@@ -255,6 +262,7 @@ function getSampleProjects(): SimpleProject[] {
       title: 'Bondi Beach House Transformation',
       location: 'Bondi Beach, NSW',
       type: 'Renovation',
+      status: 'Done',
       story: 'Complete transformation of a 1960s beach house into a modern sustainable family home. The project doubled the living space while preserving the coastal character and achieving heritage approval.',
       slug: 'bondi-beach-house-transformation',
       heroImage: '',
@@ -267,6 +275,7 @@ function getSampleProjects(): SimpleProject[] {
       title: 'Surry Hills Tech Hub',
       location: 'Surry Hills, NSW',
       type: 'Commercial',
+      status: 'Done',
       story: 'Modern office transformation for a growing tech startup. Delivered 2 weeks early and 25% under budget with zero disruption to daily operations.',
       slug: 'surry-hills-tech-hub',
       heroImage: '',
@@ -290,6 +299,7 @@ export const SIMPLE_NOTION_SCHEMA = {
     'Gallery Images': { type: 'files' },
     'Video URL': { type: 'url' },
     Featured: { type: 'checkbox' },
+    Status: { type: 'status', options: ['Not started', 'In progress', 'Done'] },
     Slug: { type: 'rich_text' } // Optional - auto-generated from title if empty
   }
 }

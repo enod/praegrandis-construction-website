@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T04:00:40.365Z",
+  "generatedAt": "2026-05-22T04:30:28.812Z",
   "databaseId": "102e1f1b4e2a82dc927d816f1f940967",
   "settings": {
     "quality": 82,
@@ -7,6 +7,120 @@
     "heroMaxWidth": 2400
   },
   "projects": {
+    "368e1f1b-4e2a-802e-adaf-f75ad4986786": {
+      "title": "D65H HOUSE",
+      "slug": "d65h-house",
+      "status": "Not started",
+      "featured": false,
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a802eadaff75ad4986786/1-1-ae08faa59e71.webp",
+            "width": 873,
+            "height": 509,
+            "bytes": 34580,
+            "originalBytes": 384362,
+            "sourceName": "Screenshot 2026-05-22 at 2.12.04 pm.png"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a802eadaff75ad4986786/hero-image-1-ae08faa59e71.webp",
+            "width": 873,
+            "height": 509,
+            "bytes": 34580,
+            "originalBytes": 384362,
+            "sourceName": "Screenshot 2026-05-22 at 2.12.04 pm.png"
+          }
+        ]
+      }
+    },
+    "368e1f1b-4e2a-808f-afaa-e57032b60000": {
+      "title": "F34M HOUSE",
+      "slug": "f34m-house",
+      "status": "Not started",
+      "featured": false,
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a808fafaae57032b60000/1-1-eff3582e1e0b.webp",
+            "width": 1800,
+            "height": 1004,
+            "bytes": 356190,
+            "originalBytes": 8531529,
+            "sourceName": "facade 4k.png"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a808fafaae57032b60000/hero-image-1-e4ef4d7573c7.webp",
+            "width": 2400,
+            "height": 1339,
+            "bytes": 550478,
+            "originalBytes": 8531529,
+            "sourceName": "facade 4k.png"
+          }
+        ]
+      }
+    },
+    "368e1f1b-4e2a-8021-b88d-c4e918d55fc3": {
+      "title": "M1S HOUSE",
+      "slug": "m1s-house",
+      "status": "In progress",
+      "featured": false,
+      "properties": {
+        "1": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8021b88dc4e918d55fc3/1-1-dbc246e8cb62.webp",
+            "width": 749,
+            "height": 523,
+            "bytes": 32886,
+            "originalBytes": 383299,
+            "sourceName": "Screenshot 2026-05-22 at 2.04.38 pm.png"
+          }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8021b88dc4e918d55fc3/2-1-8625f09c1388.webp",
+            "width": 853,
+            "height": 592,
+            "bytes": 27196,
+            "originalBytes": 381960,
+            "sourceName": "Screenshot 2026-05-22 at 2.05.21 pm.png"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8021b88dc4e918d55fc3/3-1-c6416bb01d5c.webp",
+            "width": 917,
+            "height": 725,
+            "bytes": 65426,
+            "originalBytes": 781791,
+            "sourceName": "Screenshot 2026-05-22 at 2.05.50 pm.png"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8021b88dc4e918d55fc3/4-1-6d0b9ae8dff3.webp",
+            "width": 812,
+            "height": 729,
+            "bytes": 50274,
+            "originalBytes": 590226,
+            "sourceName": "Screenshot 2026-05-22 at 2.06.10 pm.png"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8021b88dc4e918d55fc3/hero-image-1-dbc246e8cb62.webp",
+            "width": 749,
+            "height": 523,
+            "bytes": 32886,
+            "originalBytes": 383299,
+            "sourceName": "Screenshot 2026-05-22 at 2.04.38 pm.png"
+          }
+        ]
+      }
+    },
     "368e1f1b-4e2a-8031-ae23-d2935ce9a409": {
       "title": "G21D HOUSE",
       "slug": "g21d-house",
@@ -21,8 +135,69 @@
             "originalBytes": 7042146,
             "sourceName": "s3 upscale.png"
           }
+        ],
+        "2": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8031ae23d2935ce9a409/2-1-bc45125594ef.webp",
+            "width": 1800,
+            "height": 1005,
+            "bytes": 114216,
+            "originalBytes": 8562127,
+            "sourceName": "aicomplex-1770171824401.png"
+          }
+        ],
+        "3": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8031ae23d2935ce9a409/3-1-e8a3eda65df1.webp",
+            "width": 1800,
+            "height": 1005,
+            "bytes": 74804,
+            "originalBytes": 2766890,
+            "sourceName": "bedroom bathroom.png"
+          }
+        ],
+        "4": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8031ae23d2935ce9a409/4-1-9901d2313bd9.webp",
+            "width": 1800,
+            "height": 1005,
+            "bytes": 78812,
+            "originalBytes": 15456515,
+            "sourceName": "living 2.png"
+          }
+        ],
+        "5": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8031ae23d2935ce9a409/5-1-50e192da59bb.webp",
+            "width": 1161,
+            "height": 1080,
+            "bytes": 68134,
+            "originalBytes": 2262157,
+            "sourceName": "laundry.png"
+          }
+        ],
+        "6": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8031ae23d2935ce9a409/6-1-4c1de1486809.webp",
+            "width": 1800,
+            "height": 1005,
+            "bytes": 86934,
+            "originalBytes": 8583229,
+            "sourceName": "bedroom 1.png"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/368e1f1b4e2a8031ae23d2935ce9a409/hero-image-1-aef0bebba874.webp",
+            "width": 2400,
+            "height": 1340,
+            "bytes": 167780,
+            "originalBytes": 8593938,
+            "sourceName": "living 3.png"
+          }
         ]
-      }
+      },
+      "status": "In progress"
     },
     "33ee1f1b-4e2a-8366-b456-011b548389a1": {
       "title": "B6R HOSUE",
@@ -99,7 +274,8 @@
           }
         ]
       },
-      "featured": false
+      "featured": false,
+      "status": "Done"
     },
     "6b4e1f1b-4e2a-8340-a455-0186db947bb7": {
       "title": "H24M HOUSE",
@@ -176,7 +352,8 @@
           }
         ]
       },
-      "featured": true
+      "featured": true,
+      "status": "Done"
     },
     "36be1f1b-4e2a-8367-bc45-01c33c83ce01": {
       "title": "S22M HOUSE",
@@ -253,7 +430,8 @@
           }
         ]
       },
-      "featured": true
+      "featured": true,
+      "status": "Done"
     },
     "b4ae1f1b-4e2a-8375-8f7d-01af805c0a80": {
       "title": "B77N HOSUE",
@@ -330,7 +508,8 @@
           }
         ]
       },
-      "featured": false
+      "featured": false,
+      "status": "Done"
     },
     "f5ae1f1b-4e2a-82ac-8d53-81770286a87f": {
       "title": "S111A HOUSE",
@@ -407,7 +586,8 @@
           }
         ]
       },
-      "featured": false
+      "featured": false,
+      "status": "Done"
     },
     "cc1e1f1b-4e2a-82d6-b557-81ef8dd2fb58": {
       "title": "L121R HOUSE",
@@ -484,7 +664,8 @@
           }
         ]
       },
-      "featured": true
+      "featured": true,
+      "status": "Done"
     }
   }
 }

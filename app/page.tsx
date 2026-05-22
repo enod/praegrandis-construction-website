@@ -5,6 +5,7 @@ import { getFeaturedProjects } from '@/lib/notion-simple'
 import { getAssetPath } from '@/lib/assets'
 import LogoButton from '@/components/LogoButton'
 import ContactForm from '@/components/ContactForm'
+import ProjectStatusBadge from '@/components/ProjectStatusBadge'
 
 export default async function Home() {
   const featuredProjects = await getFeaturedProjects()
@@ -128,6 +129,7 @@ export default async function Home() {
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-gray-700">
                     {project.type}
                   </div>
+                  <ProjectStatusBadge status={project.status} className="absolute top-4 right-4" />
                   <div className="absolute bottom-4 left-4 right-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <p className="text-sm font-medium">{project.location}</p>
                   </div>

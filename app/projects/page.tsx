@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getProjects } from '@/lib/notion-simple'
 import LogoButton from '@/components/LogoButton'
+import ProjectStatusBadge from '@/components/ProjectStatusBadge'
 
 export default async function ProjectsPage() {
   const projects = await getProjects()
@@ -44,7 +45,7 @@ export default async function ProjectsPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+            {projects.map((project, index) => (
               <Link key={project.id} href={`/projects/${project.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 block">
                 <div className="h-64 bg-gray-200 relative overflow-hidden">
                   {project.heroImage && (
@@ -54,12 +55,14 @@ export default async function ProjectsPage() {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      priority={index === 0}
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-gray-700">
                     {project.type}
                   </div>
+                  <ProjectStatusBadge status={project.status} className="absolute top-4 right-4" />
                   <div className="absolute bottom-4 left-4 right-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <p className="text-sm font-medium">{project.location}</p>
                   </div>
