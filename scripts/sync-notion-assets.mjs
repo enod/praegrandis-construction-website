@@ -166,6 +166,7 @@ async function syncPageAssets(page) {
     ...previousPageManifest,
     title,
     slug,
+    featured: Boolean(properties.Featured?.checkbox),
     properties: {
       ...(previousPageManifest?.properties || {}),
     },

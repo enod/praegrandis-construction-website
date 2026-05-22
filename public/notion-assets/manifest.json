@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T03:47:38.433Z",
+  "generatedAt": "2026-05-22T03:56:24.474Z",
   "databaseId": "102e1f1b4e2a82dc927d816f1f940967",
   "settings": {
     "quality": 82,
@@ -81,7 +81,8 @@
             "sourceName": "Belmore-Street-6-Rozelle-Portrait.jpg"
           }
         ]
-      }
+      },
+      "featured": false
     },
     "6b4e1f1b-4e2a-8340-a455-0186db947bb7": {
       "title": "H24M HOUSE",
@@ -157,7 +158,8 @@
             "sourceName": "Horton_Street_24_Marrickville Dusk_Facade.jpg"
           }
         ]
-      }
+      },
+      "featured": true
     },
     "36be1f1b-4e2a-8367-bc45-01c33c83ce01": {
       "title": "S22M HOUSE",
@@ -233,7 +235,8 @@
             "sourceName": "0T6A0497 copy 2.jpg"
           }
         ]
-      }
+      },
+      "featured": true
     },
     "b4ae1f1b-4e2a-8375-8f7d-01af805c0a80": {
       "title": "B77N HOSUE",
@@ -309,7 +312,8 @@
             "sourceName": "North Bridge 7.jpg"
           }
         ]
-      }
+      },
+      "featured": false
     },
     "f5ae1f1b-4e2a-82ac-8d53-81770286a87f": {
       "title": "S111A HOUSE",
@@ -385,7 +389,8 @@
             "sourceName": "IMG_8198.JPEG"
           }
         ]
-      }
+      },
+      "featured": false
     },
     "cc1e1f1b-4e2a-82d6-b557-81ef8dd2fb58": {
       "title": "L121R HOUSE",
@@ -461,7 +466,8 @@
             "sourceName": "0O3A7905_4166-2be7-cb76-65be-f103-5879-b979-2ecb_20230824044308_original.jpg"
           }
         ]
-      }
+      },
+      "featured": true
     }
   }
 }

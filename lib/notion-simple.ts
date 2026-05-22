@@ -32,6 +32,7 @@ interface NotionAssetManifest {
   projects?: Record<string, {
     title?: string
     slug?: string
+    featured?: boolean
     properties?: Record<string, Array<{
       path: string
       width?: number
@@ -97,6 +98,10 @@ function getLocalProjectAssetUrls(page: any, propertyName: string): string[] {
   return getManifestProjectForPage(page)?.properties?.[propertyName]?.map((asset) => asset.path).filter(Boolean) || []
 }
 
+function getLocalProjectFeatured(page: any): boolean | undefined {
+  return getManifestProjectForPage(page)?.featured
+}
+
 // Helper function to extract file URLs from Notion files
 function extractFileUrls(files: any[]): string[] {
   return files?.map((file: any) => {
@@ -148,7 +153,7 @@ function transformNotionPage(page: any): SimpleProject {
     videoUrl: properties['Video URL']?.url || properties['Video']?.url || undefined,
     
     // Display
-    featured: properties.Featured?.checkbox || false,
+    featured: getLocalProjectFeatured(page) ?? (properties.Featured?.checkbox || false),
     
     // SEO - Use Notion slug if available, otherwise generate from title
     slug: extractRichText(properties.Slug?.rich_text || []) || 
