@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "sync:notion-assets": "node scripts/sync-notion-assets.mjs",
-    "build:with-assets": "npm run sync:notion-assets && npm run build",
-    "build": "next build",
+    "build": "npm run build:with-assets",
+    "build:with-assets": "npm run sync:notion-assets && next build",
     "start": "next start",
     "lint": "next lint",
     "test:notion": "node test-notion.js"
