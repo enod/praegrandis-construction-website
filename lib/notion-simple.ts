@@ -194,6 +194,37 @@ function mergeManifestProjects(projects: SimpleProject[]): SimpleProject[] {
   return [...mergedProjects, ...extraProjects]
 }
 
+function getProjectStatusRank(status: string): number {
+  if (status === 'Done') {
+    return 0
+  }
+
+  if (status === 'In progress') {
+    return 1
+  }
+
+  if (status === 'Not started') {
+    return 2
+  }
+
+  return 3
+}
+
+function sortProjectsByStatus(projects: SimpleProject[]): SimpleProject[] {
+  return projects
+    .map((project, index) => ({ project, index }))
+    .sort((a, b) => {
+      const statusRankDiff = getProjectStatusRank(a.project.status) - getProjectStatusRank(b.project.status)
+
+      if (statusRankDiff !== 0) {
+        return statusRankDiff
+      }
+
+      return a.index - b.index
+    })
+    .map(({ project }) => project)
+}
+
 // Transform Notion page data to SimpleProject interface
 function transformNotionPage(page: any): SimpleProject {
   const properties = page.properties
@@ -239,26 +270,29 @@ export async function getProjects(): Promise<SimpleProject[]> {
   try {
     if (!NOTION_DATABASE_ID) {
       console.warn('Notion database ID not configured, using local manifest or sample data')
-      return getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
+      const projects = getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
+      return sortProjectsByStatus(projects)
     }
 
     if (!process.env.NOTION_TOKEN) {
       console.warn('Notion token not configured, using local manifest or sample data')
-      return getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
+      const projects = getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
+      return sortProjectsByStatus(projects)
     }
 
     const response = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
     })
 
-    return mergeManifestProjects(response.results.map(transformNotionPage))
+    return sortProjectsByStatus(mergeManifestProjects(response.results.map(transformNotionPage)))
   } catch (error) {
     console.error('Error fetching projects from Notion:', error)
     if (error instanceof Error) {
       console.error('Error message:', error.message)
     }
     console.warn('Falling back to local manifest or sample data')
-    return getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
+    const projects = getManifestProjects().length > 0 ? getManifestProjects() : getSampleProjects()
+    return sortProjectsByStatus(projects)
   }
 }
 
