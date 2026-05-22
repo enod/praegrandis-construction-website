@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T03:06:37.350Z",
+  "generatedAt": "2026-05-22T03:47:38.433Z",
   "databaseId": "102e1f1b4e2a82dc927d816f1f940967",
   "settings": {
     "quality": 82,
@@ -291,12 +291,22 @@
         ],
         "6": [
           {
-            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/6-1-f89130d0d9f2.webp",
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/6-1-2448344b125e.webp",
             "width": 1800,
             "height": 2700,
-            "bytes": 60106,
-            "originalBytes": 7524095,
-            "sourceName": "North Bridge 146.jpg"
+            "bytes": 95166,
+            "originalBytes": 8765984,
+            "sourceName": "North Bridge 69.jpg"
+          }
+        ],
+        "Hero Image": [
+          {
+            "path": "/notion-assets/b4ae1f1b4e2a83758f7d01af805c0a80/hero-image-1-7f91dd18b7e2.webp",
+            "width": 2400,
+            "height": 1600,
+            "bytes": 97818,
+            "originalBytes": 8688074,
+            "sourceName": "North Bridge 7.jpg"
           }
         ]
       }
@@ -443,12 +453,12 @@
         ],
         "Hero Image": [
           {
-            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/hero-image-1-9237554a6460.webp",
+            "path": "/notion-assets/cc1e1f1b4e2a82d6b55781ef8dd2fb58/hero-image-1-e0915757686b.webp",
             "width": 2400,
-            "height": 1600,
-            "bytes": 550080,
-            "originalBytes": 1042809,
-            "sourceName": "Lawson_St_121_Redfer_c53a-08c9-915e-0905-3610-b171-db31-8efa_20230825022140_original.jpg"
+            "height": 1602,
+            "bytes": 488794,
+            "originalBytes": 997487,
+            "sourceName": "0O3A7905_4166-2be7-cb76-65be-f103-5879-b979-2ecb_20230824044308_original.jpg"
           }
         ]
       }
