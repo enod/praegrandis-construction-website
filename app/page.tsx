@@ -4,9 +4,12 @@ import Image from 'next/image'
 import { getFeaturedProjects } from '@/lib/notion-simple'
 import { getAssetPath } from '@/lib/assets'
 import LogoButton from '@/components/LogoButton'
+import ContactForm from '@/components/ContactForm'
 
 export default async function Home() {
   const featuredProjects = await getFeaturedProjects()
+  const contactFormEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xredqdvw'
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -439,128 +442,11 @@ export default async function Home() {
             {/* Contact Form */}
             <div className="bg-white p-8 lg:p-12 rounded-3xl shadow-sm border border-gray-100">
               <h3 className="text-2xl font-semibold text-gray-900 mb-8">Get Your Free Consultation</h3>
-              
-              <form action="https://formspree.io/f/mqabypan" method="POST" className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                      placeholder="(02) 1234 5678"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="project-type" className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Type
-                    </label>
-                    <select
-                      id="project-type"
-                      name="project-type"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                    >
-                      <option value="">Select project type</option>
-                      <option value="residential-construction">Residential Construction</option>
-                      <option value="commercial-project">Commercial Project</option>
-                      <option value="renovation-extension">Renovation & Extension</option>
-                      <option value="consultation">General Consultation</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Details *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors resize-none"
-                    placeholder="Tell us about your project, timeline, budget range, and any specific requirements..."
-                  ></textarea>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    name="consent"
-                    required
-                    className="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
-                  />
-                  <label htmlFor="consent" className="text-sm text-gray-600">
-                    I consent to Praegrandis Construction contacting me about my project inquiry. 
-                    We respect your privacy and will never share your information.
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full px-8 py-4 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02] transform"
-                  style={{ backgroundColor: '#2E7D32' }}
-                >
-                  Send My Project Inquiry
-                </button>
-              </form>
+              <ContactForm endpoint={contactFormEndpoint} />
             </div>
 
-            {/* Office Information */}
+            {/* Inquiry Information */}
             <div className="space-y-8">
-              <div className="text-center lg:text-left">
-                <div 
-                  className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto lg:mx-0 mb-6"
-                  style={{ backgroundColor: '#F5C842' }}
-                >
-                  <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-3 text-xl">Visit Our Office</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  123 Construction Street<br />
-                  Sydney NSW 2000<br />
-                  <span className="text-sm text-gray-500">Mon-Fri 7AM-5PM</span>
-                </p>
-              </div>
-
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <h4 className="font-semibold text-gray-900 mb-4 text-lg">Why Choose Our Form?</h4>
                 <ul className="space-y-3 text-gray-600">

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { getProjectBySlug } from '@/lib/notion-simple'
 import SimpleProjectStory from '@/components/SimpleProjectStory'
 
@@ -18,17 +19,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return <SimpleProjectStory project={project} />
 }
 
-// This function generates static paths for all projects at build time
+// Generate static paths for GitHub Pages/static export builds.
 export async function generateStaticParams() {
   try {
     const { getProjects } = await import('@/lib/notion-simple')
     const projects = await getProjects()
+
     return projects.map((project) => ({
       slug: project.slug,
     }))
   } catch (error) {
     console.error('Error generating static params:', error)
-    // Fallback to sample project slugs
+
     return [
       { slug: 'bondi-beach-house-transformation' },
       { slug: 'surry-hills-tech-hub' },
@@ -37,7 +39,7 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: ProjectPageProps) {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const project = await getProjectBySlug(params.slug)
   
   if (!project) {
@@ -52,7 +54,7 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     openGraph: {
       title: project.title,
       description: project.story,
-      images: [project.heroImage],
+      ...(project.heroImage ? { images: [project.heroImage] } : {}),
     },
   }
 }

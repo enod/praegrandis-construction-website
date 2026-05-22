@@ -1,5 +1,7 @@
 // Simplified Notion CMS Integration for Praegrandis Construction
 import { Client } from '@notionhq/client'
+import fs from 'node:fs'
+import path from 'node:path'
 
 export interface SimpleProject {
   id: string
@@ -24,6 +26,17 @@ const notion = new Client({
 })
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID!
+let cachedAssetManifest: NotionAssetManifest | null | undefined
+
+interface NotionAssetManifest {
+  projects?: Record<string, {
+    properties?: Record<string, Array<{
+      path: string
+      width?: number
+      height?: number
+    }>>
+  }>
+}
 
 // Helper function to extract text from Notion rich text
 function extractRichText(richText: any[]): string {
@@ -40,6 +53,26 @@ function generateSlug(title: string): string {
     .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
 }
 
+function getAssetManifest(): NotionAssetManifest | null {
+  if (cachedAssetManifest !== undefined) {
+    return cachedAssetManifest
+  }
+
+  try {
+    const manifestPath = path.join(process.cwd(), 'public', 'notion-assets', 'manifest.json')
+    cachedAssetManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+  } catch {
+    cachedAssetManifest = null
+  }
+
+  return cachedAssetManifest ?? null
+}
+
+function getLocalAssetUrls(pageId: string, propertyName: string): string[] {
+  const manifest = getAssetManifest()
+  return manifest?.projects?.[pageId]?.properties?.[propertyName]?.map((asset) => asset.path).filter(Boolean) || []
+}
+
 // Helper function to extract file URLs from Notion files
 function extractFileUrls(files: any[]): string[] {
   return files?.map((file: any) => {
@@ -50,6 +83,16 @@ function extractFileUrls(files: any[]): string[] {
     }
     return ''
   }).filter(Boolean) || []
+}
+
+function extractProjectFileUrls(page: any, propertyName: string): string[] {
+  const localAssetUrls = getLocalAssetUrls(page.id, propertyName)
+
+  if (localAssetUrls.length > 0) {
+    return localAssetUrls
+  }
+
+  return extractFileUrls(page.properties?.[propertyName]?.files || [])
 }
 
 // Transform Notion page data to SimpleProject interface
@@ -64,19 +107,19 @@ function transformNotionPage(page: any): SimpleProject {
     story: extractRichText(properties.Story?.rich_text || properties.Description?.rich_text || []),
     
     // Media
-    heroImage: extractFileUrls(properties['Hero Image']?.files || [])[0] || '/api/placeholder/1200/800',
+    heroImage: extractProjectFileUrls(page, 'Hero Image')[0] || '',
     galleryImages: [
-      ...extractFileUrls(properties['1']?.files || []),
-      ...extractFileUrls(properties['2']?.files || []),
-      ...extractFileUrls(properties['3']?.files || []),
-      ...extractFileUrls(properties['4']?.files || []),
-      ...extractFileUrls(properties['5']?.files || []),
-      ...extractFileUrls(properties['6']?.files || []),
+      ...extractProjectFileUrls(page, '1'),
+      ...extractProjectFileUrls(page, '2'),
+      ...extractProjectFileUrls(page, '3'),
+      ...extractProjectFileUrls(page, '4'),
+      ...extractProjectFileUrls(page, '5'),
+      ...extractProjectFileUrls(page, '6'),
       // Fallback to old columns for backward compatibility
-      ...extractFileUrls(properties['Gallery Images']?.files || []),
-      ...extractFileUrls(properties['Before Images']?.files || []),
-      ...extractFileUrls(properties['After Images']?.files || []),
-      ...extractFileUrls(properties['Process Images']?.files || []),
+      ...extractProjectFileUrls(page, 'Gallery Images'),
+      ...extractProjectFileUrls(page, 'Before Images'),
+      ...extractProjectFileUrls(page, 'After Images'),
+      ...extractProjectFileUrls(page, 'Process Images'),
     ].filter(Boolean),
     videoUrl: properties['Video URL']?.url || properties['Video']?.url || undefined,
     
@@ -92,54 +135,27 @@ function transformNotionPage(page: any): SimpleProject {
 // Get all projects
 export async function getProjects(): Promise<SimpleProject[]> {
   try {
-    // Enhanced debug info for production troubleshooting
-    console.log('🔍 Notion Integration Debug:')
-    console.log('- Environment:', process.env.NODE_ENV)
-    console.log('- NOTION_TOKEN available:', !!process.env.NOTION_TOKEN)
-    console.log('- NOTION_DATABASE_ID available:', !!process.env.NOTION_DATABASE_ID)
-    console.log('- Database ID value:', NOTION_DATABASE_ID ? 'Set' : 'Missing')
-    
-    // Detailed environment variable debugging for GitHub Actions
-    if (process.env.NOTION_TOKEN) {
-      console.log('- NOTION_TOKEN length:', process.env.NOTION_TOKEN.length)
-      console.log('- NOTION_TOKEN preview:', process.env.NOTION_TOKEN.substring(0, 10) + '...')
-    }
-    
-    if (process.env.NOTION_DATABASE_ID) {
-      console.log('- NOTION_DATABASE_ID length:', process.env.NOTION_DATABASE_ID.length)
-      console.log('- NOTION_DATABASE_ID preview:', process.env.NOTION_DATABASE_ID.substring(0, 8) + '...')
-    }
-    
     if (!NOTION_DATABASE_ID) {
-      console.warn('❌ Notion database ID not configured, using sample data')
+      console.warn('Notion database ID not configured, using sample data')
       return getSampleProjects()
     }
 
     if (!process.env.NOTION_TOKEN) {
-      console.warn('❌ Notion token not configured, using sample data')
+      console.warn('Notion token not configured, using sample data')
       return getSampleProjects()
     }
 
-    console.log('📡 Attempting to fetch from Notion database...')
     const response = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
     })
 
-    console.log(`✅ Notion fetch successful: ${response.results.length} projects found`)
-    const projects = response.results.map(transformNotionPage)
-    console.log('🔄 Transformed projects:', projects.map(p => ({ title: p.title, featured: p.featured })))
-    
-    // Force logging the actual data being returned for debugging
-    console.log('📋 Final projects data being returned:', JSON.stringify(projects, null, 2))
-    
-    return projects
+    return response.results.map(transformNotionPage)
   } catch (error) {
-    console.error('❌ Error fetching projects from Notion:', error)
+    console.error('Error fetching projects from Notion:', error)
     if (error instanceof Error) {
-      console.error('❌ Error message:', error.message)
-      console.error('❌ Error stack:', error.stack)
+      console.error('Error message:', error.message)
     }
-    console.warn('🔄 Falling back to sample data')
+    console.warn('Falling back to sample data')
     return getSampleProjects()
   }
 }
@@ -212,15 +228,8 @@ function getSampleProjects(): SimpleProject[] {
       type: 'Renovation',
       story: 'Complete transformation of a 1960s beach house into a modern sustainable family home. The project doubled the living space while preserving the coastal character and achieving heritage approval.',
       slug: 'bondi-beach-house-transformation',
-      heroImage: '/api/placeholder/1200/800',
-      galleryImages: [
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-      ],
+      heroImage: '',
+      galleryImages: [],
       videoUrl: undefined,
       featured: true,
     },
@@ -231,13 +240,8 @@ function getSampleProjects(): SimpleProject[] {
       type: 'Commercial',
       story: 'Modern office transformation for a growing tech startup. Delivered 2 weeks early and 25% under budget with zero disruption to daily operations.',
       slug: 'surry-hills-tech-hub',
-      heroImage: '/api/placeholder/1200/800',
-      galleryImages: [
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-        '/api/placeholder/800/600',
-      ],
+      heroImage: '',
+      galleryImages: [],
       featured: true,
     }
   ]

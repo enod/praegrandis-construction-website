@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { SimpleProject } from '@/lib/notion-simple'
+import type { SimpleProject } from '@/lib/notion-simple'
 import LogoButton from '@/components/LogoButton'
 import ImageLightbox from '@/components/ImageLightbox'
 
@@ -179,7 +179,7 @@ export default function SimpleProjectStory({ project }: SimpleProjectStoryProps)
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
-              href="/contact"
+              href="/#contact"
               className="px-12 py-5 text-white font-medium rounded-full transition-all duration-300 hover:shadow-xl hover:scale-105"
               style={{ backgroundColor: '#2E7D32' }}
             >

@@ -1,15 +1,26 @@
 'use client'
 
+import { usePathname, useRouter } from 'next/navigation'
 import { getAssetPath } from '@/lib/assets'
 
 export default function LogoButton() {
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogoClick = () => {
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+
+    router.push('/')
   }
 
   return (
     <button
-      onClick={handleScrollToTop}
+      type="button"
+      onClick={handleLogoClick}
+      aria-label="Go to homepage"
       className="focus:outline-none"
     >
       <img

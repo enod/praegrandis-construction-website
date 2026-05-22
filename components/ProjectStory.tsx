@@ -399,7 +399,7 @@ export default function ProjectStory({ project }: ProjectStoryProps) {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
-              href="/contact"
+              href="/#contact"
               className="px-12 py-5 text-white font-medium rounded-full transition-all duration-300 hover:shadow-xl hover:scale-105"
               style={{ backgroundColor: '#2E7D32' }}
             >
